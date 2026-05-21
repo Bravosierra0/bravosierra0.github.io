@@ -24,34 +24,36 @@
 
   /* ── LIGHT MODE (default) ── */
   :root {
-    --page-bg:  #e6e6e6;
-    --bg:       #f0eeea;
-    --bg2:      #e8e6e2;
-    --bg3:      #dddbd7;
-    --border:   #b8b5b0;
-    --border-d: #ccc9c4;
-    --text:     #1a1a1a;
-    --muted:    #6b6762;
-    --accent:   #c8960a;
-    --green-bg: #2a6e3a;
-    --green-fg: #e8f5eb;
-    --mono:     'IoskeleyMono', 'Courier New', Courier, monospace;
+    --page-bg:   #e6e6e6;
+    --bg:        #f0eeea;
+    --bg2:       #e8e6e2;
+    --bg3:       #dddbd7;
+    --border:    #b8b5b0;
+    --border-d:  #ccc9c4;
+    --text:      #1a1a1a;
+    --muted:     #6b6762;
+    --accent:    #c8960a;
+    --green-bg:  #2a6e3a;
+    --green-fg:  #e8f5eb;
+    --dot-color: #b0ada8;
+    --mono:      'IoskeleyMono', 'Courier New', Courier, monospace;
   }
 
   /* ── DARK MODE ── */
   @media (prefers-color-scheme: dark) {
     :root {
-      --page-bg:  #141414;
-      --bg:       #1c1c1c;
-      --bg2:      #252525;
-      --bg3:      #2e2e2e;
-      --border:   #3a3a3a;
-      --border-d: #303030;
-      --text:     #d8d4cc;
-      --muted:    #7a7670;
-      --accent:   #e8b84b;
-      --green-bg: #5a9e6f;
-      --green-fg: #0d2214;
+      --page-bg:   #141414;
+      --bg:        #1c1c1c;
+      --bg2:       #252525;
+      --bg3:       #2e2e2e;
+      --border:    #3a3a3a;
+      --border-d:  #303030;
+      --text:      #d8d4cc;
+      --muted:     #7a7670;
+      --accent:    #e8b84b;
+      --green-bg:  #5a9e6f;
+      --green-fg:  #0d2214;
+      --dot-color: #3a3836;
     }
   }
 
@@ -60,7 +62,7 @@
   html { font-size: 15px; }
 
   body {
-    background: var(--page-bg);
+    background: var(--bg);
     color: var(--text);
     font-family: var(--mono);
     font-weight: 400;
@@ -68,10 +70,11 @@
     -webkit-font-smoothing: antialiased;
     max-width: 980px;
     margin: 0 auto;
-    background: var(--bg);
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   a { color: var(--accent); text-decoration: none; }
@@ -88,9 +91,18 @@
     );
   }
 
+  /* ── dotted block separator ── */
+  .dot-rule {
+    height: 8px;
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-repeat: repeat;
+    margin: 0;
+  }
+
   /* ── header ── */
   .site-header {
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
     padding: 7px 14px;
     display: flex;
     align-items: center;
@@ -114,7 +126,7 @@
 
   /* ── nav ── */
   .site-nav {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
     display: flex;
     background: var(--bg2);
   }
@@ -137,6 +149,7 @@
   .page-body {
     display: grid;
     grid-template-columns: 1fr 300px;
+    flex: 1;
   }
 
   .col-main {
@@ -148,16 +161,21 @@
     padding: 18px 16px 28px;
   }
 
-  /* ── section labels ── */
+  /* ── section head ── */
   .section-head {
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--text);
     border-bottom: 1px solid var(--border);
     padding-bottom: 5px;
-    margin-bottom: 14px;
+    margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+  }
+
+  /* dot rule after section head */
+  .section-head + .dot-rule {
+    margin-bottom: 14px;
   }
 
   /* ── lead ── */
@@ -206,7 +224,7 @@
 
   .app-table th {
     text-align: left;
-    padding: 4px 10px 4px 0;
+    padding: 6px 10px 6px 0;
     color: var(--muted);
     font-weight: 400;
     font-size: 0.75rem;
@@ -224,11 +242,9 @@
   .app-table tr:last-child td { border-bottom: none; }
 
   .app-num { color: var(--muted); font-size: 0.8rem; }
-
   .app-name-cell { font-weight: 700; white-space: nowrap; }
   .app-name-cell a { color: var(--accent); }
   .app-name-wip { font-weight: 700; color: var(--muted); }
-
   .platform-tag { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
 
   .status-live {
@@ -269,11 +285,7 @@
   }
 
   .philosophy li:last-child { border-bottom: none; }
-
-  .philosophy li::before {
-    content: '— ';
-    color: var(--muted);
-  }
+  .philosophy li::before { content: '— '; color: var(--muted); }
 
   /* ── sidebar ── */
   .sidebar-block { margin-bottom: 22px; }
@@ -312,13 +324,55 @@
 
   /* ── footer ── */
   .site-footer {
-    padding: 9px 14px;
-    font-size: 0.78rem;
-    color: var(--muted);
-    display: flex;
-    justify-content: space-between;
     border-top: 2px solid var(--border);
     background: var(--bg2);
+  }
+
+  .footer-dot-rule {
+    height: 6px;
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-repeat: repeat;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-left {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    letter-spacing: 0.06em;
+    background: var(--bg3);
+  }
+
+  .footer-rev {
+    font-size: 0.72rem;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    background: var(--accent);
+    color: var(--bg);
   }
 
   /* ── responsive ── */
@@ -328,6 +382,7 @@
     .app-table th:nth-child(3),
     .app-table td:nth-child(3) { display: none; }
     .site-meta { display: none; }
+    .footer-left { font-size: 0.7rem; }
   }
 </style>
 </head>
@@ -359,6 +414,7 @@
     <hr class="sep">
 
     <div class="section-head" id="apps">Apps</div>
+    <div class="dot-rule"></div>
 
     <table class="app-table">
       <thead>
@@ -398,6 +454,7 @@
     <hr class="sep">
 
     <div class="section-head">Principles</div>
+    <div class="dot-rule"></div>
 
     <ul class="philosophy">
       <li>Small scope. One thing done well.</li>
@@ -412,6 +469,7 @@
 
     <div class="sidebar-block">
       <div class="section-head">Stack</div>
+      <div class="dot-rule"></div>
       <div class="kv-row"><span class="kv-key">Language</span><span class="kv-val">Swift</span></div>
       <div class="kv-row"><span class="kv-key">UI</span><span class="kv-val">SwiftUI</span></div>
       <div class="kv-row"><span class="kv-key">IDE</span><span class="kv-val">Xcode</span></div>
@@ -421,12 +479,14 @@
 
     <div class="sidebar-block">
       <div class="section-head">Source</div>
+      <div class="dot-rule"></div>
       <p style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
       <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener">github.com/Bravosierra0 ↗</a>
     </div>
 
     <div class="sidebar-block">
       <div class="section-head">App Store</div>
+      <div class="dot-rule"></div>
       <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#">↗</a></span></div>
       <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val"><a href="#">↗</a></span></div>
       <div class="kv-row"><span class="kv-key">ShiftPlanner</span><span class="kv-val" style="color:var(--muted)">In dev</span></div>
@@ -437,8 +497,14 @@
 </div>
 
 <footer class="site-footer">
-  <span>b347.dev</span>
-  <span>Swift · SwiftUI · Xcode</span>
+  <div class="footer-dot-rule"></div>
+  <div class="footer-inner">
+    <span class="footer-left">b347.dev — independent Apple platform developer</span>
+    <div class="footer-right">
+      <span class="footer-tag">REV</span>
+      <span class="footer-rev">2026.05.21</span>
+    </div>
+  </div>
 </footer>
 
 </body>

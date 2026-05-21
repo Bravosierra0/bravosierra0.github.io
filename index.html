@@ -7,30 +7,68 @@
 <meta name="description" content="Building small, focused apps for all Apple platforms.">
 <meta name="robots" content="noindex, nofollow">
 <style>
+  @font-face {
+    font-family: 'IoskeleyMono';
+    src: url('Fonts/IoskeleyMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IoskeleyMono';
+    src: url('Fonts/IoskeleyMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* ── LIGHT MODE (default) ── */
   :root {
-    --bg:       #1c1c1c;
-    --bg2:      #252525;
-    --bg3:      #2e2e2e;
-    --border:   #3a3a3a;
-    --text:     #d8d4cc;
-    --muted:    #7a7670;
-    --accent:   #e8b84b;
-    --accent2:  #5a9e6f;
-    --mono:     'Courier New', Courier, monospace;
+    --page-bg:  #e6e6e6;
+    --bg:       #f0eeea;
+    --bg2:      #e8e6e2;
+    --bg3:      #dddbd7;
+    --border:   #b8b5b0;
+    --border-d: #ccc9c4;
+    --text:     #1a1a1a;
+    --muted:    #6b6762;
+    --accent:   #c8960a;
+    --green-bg: #2a6e3a;
+    --green-fg: #e8f5eb;
+    --mono:     'IoskeleyMono', 'Courier New', Courier, monospace;
+  }
+
+  /* ── DARK MODE ── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page-bg:  #141414;
+      --bg:       #1c1c1c;
+      --bg2:      #252525;
+      --bg3:      #2e2e2e;
+      --border:   #3a3a3a;
+      --border-d: #303030;
+      --text:     #d8d4cc;
+      --muted:    #7a7670;
+      --accent:   #e8b84b;
+      --green-bg: #5a9e6f;
+      --green-fg: #0d2214;
+    }
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { font-size: 13px; }
+  html { font-size: 15px; }
 
   body {
-    background: var(--bg);
+    background: var(--page-bg);
     color: var(--text);
     font-family: var(--mono);
-    line-height: 1.5;
+    font-weight: 400;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    max-width: 960px;
+    max-width: 980px;
     margin: 0 auto;
+    background: var(--bg);
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
     min-height: 100vh;
@@ -39,31 +77,7 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* ── header ── */
-  .site-header {
-    border-bottom: 2px solid var(--border);
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--bg2);
-  }
-
-  .site-title {
-    font-size: 0.92rem;
-    font-weight: bold;
-    letter-spacing: 0.02em;
-    color: var(--text);
-  }
-
-  .site-title span { color: var(--accent); }
-
-  .site-meta {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  /* ── color bar ── */
+  /* ── colorbar ── */
   .colorbar {
     height: 4px;
     background: linear-gradient(to right,
@@ -72,6 +86,30 @@
       #7c6ce8 48% 56%, #c84ae8 56% 64%, #e84a8a 64% 72%,
       #888 72% 80%, #555 80% 88%, #333 88% 100%
     );
+  }
+
+  /* ── header ── */
+  .site-header {
+    border-bottom: 2px solid var(--border);
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+  }
+
+  .site-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .site-title span { color: var(--accent); }
+
+  .site-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
   }
 
   /* ── nav ── */
@@ -83,77 +121,83 @@
 
   .site-nav a {
     display: block;
-    padding: 5px 14px;
-    font-size: 0.8rem;
+    padding: 6px 16px;
+    font-size: 0.87rem;
     color: var(--text);
     border-right: 1px solid var(--border);
     text-decoration: none;
+    font-family: var(--mono);
   }
 
   .site-nav a:hover { background: var(--bg3); color: var(--accent); }
   .site-nav a.active { color: var(--accent); }
-  .site-nav a.active::before { content: '● '; font-size: 0.5rem; vertical-align: 2px; }
+  .site-nav a.active::before { content: '● '; font-size: 0.55rem; vertical-align: 2px; }
 
   /* ── layout ── */
   .page-body {
     display: grid;
-    grid-template-columns: 1fr 320px;
-    border-bottom: 1px solid var(--border);
+    grid-template-columns: 1fr 300px;
   }
 
   .col-main {
     border-right: 1px solid var(--border);
-    padding: 16px;
+    padding: 18px 18px 28px;
   }
 
   .col-side {
-    padding: 16px;
+    padding: 18px 16px 28px;
   }
 
   /* ── section labels ── */
   .section-head {
     font-size: 0.8rem;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--text);
     border-bottom: 1px solid var(--border);
-    padding-bottom: 4px;
-    margin-bottom: 12px;
+    padding-bottom: 5px;
+    margin-bottom: 14px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
   }
 
   /* ── lead ── */
-  .lead-block {
-    margin-bottom: 20px;
-  }
+  .lead-block { margin-bottom: 22px; }
 
   .lead-line {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 9px;
   }
 
   .lead-statement {
-    font-size: 1.0rem;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.5;
     border-left: 3px solid var(--accent);
-    padding-left: 10px;
-    margin-bottom: 12px;
+    padding-left: 11px;
+    margin-bottom: 13px;
   }
 
   .lead-body {
-    font-size: 0.8rem;
+    font-size: 0.87rem;
     color: var(--muted);
     line-height: 1.7;
+  }
+
+  /* ── separator ── */
+  .sep {
+    border: none;
+    border-top: 1px dotted var(--border);
+    margin: 18px 0;
   }
 
   /* ── app table ── */
   .app-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.8rem;
-    margin-bottom: 20px;
+    font-size: 0.87rem;
+    margin-bottom: 22px;
   }
 
   .app-table thead tr {
@@ -162,96 +206,88 @@
 
   .app-table th {
     text-align: left;
-    padding: 4px 8px 4px 0;
+    padding: 4px 10px 4px 0;
     color: var(--muted);
-    font-weight: normal;
-    font-size: 0.72rem;
+    font-weight: 400;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
+    font-family: var(--mono);
   }
 
   .app-table td {
-    padding: 7px 8px 7px 0;
+    padding: 9px 10px 9px 0;
     vertical-align: top;
-    border-bottom: 1px dotted var(--border);
-    color: var(--text);
+    border-bottom: 1px dotted var(--border-d);
   }
 
   .app-table tr:last-child td { border-bottom: none; }
 
-  .app-name-cell { font-weight: bold; white-space: nowrap; }
+  .app-num { color: var(--muted); font-size: 0.8rem; }
 
+  .app-name-cell { font-weight: 700; white-space: nowrap; }
   .app-name-cell a { color: var(--accent); }
+  .app-name-wip { font-weight: 700; color: var(--muted); }
+
+  .platform-tag { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
 
   .status-live {
     display: inline-block;
-    background: var(--accent2);
-    color: #0d2214;
-    font-size: 0.65rem;
-    padding: 1px 5px;
+    background: var(--green-bg);
+    color: var(--green-fg);
+    font-size: 0.72rem;
+    padding: 1px 6px;
     letter-spacing: 0.05em;
-    white-space: nowrap;
+    font-weight: 700;
+    font-family: var(--mono);
   }
 
   .status-wip {
     display: inline-block;
     background: var(--bg3);
     color: var(--muted);
-    font-size: 0.65rem;
-    padding: 1px 5px;
+    font-size: 0.72rem;
+    padding: 1px 6px;
     border: 1px solid var(--border);
     letter-spacing: 0.05em;
-    white-space: nowrap;
+    font-family: var(--mono);
   }
 
-  .platform-tag {
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  /* ── philosophy box ── */
+  /* ── philosophy ── */
   .philosophy {
     border: 1px solid var(--border);
     background: var(--bg2);
-    margin-bottom: 0;
-  }
-
-  .philosophy-head {
-    padding: 5px 10px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border-bottom: 1px solid var(--border);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
   }
 
   .philosophy li {
     list-style: none;
-    font-size: 0.78rem;
-    padding: 5px 10px;
-    border-bottom: 1px solid var(--border);
+    font-size: 0.87rem;
+    padding: 6px 11px;
+    border-bottom: 1px solid var(--border-d);
     color: var(--text);
+    line-height: 1.5;
   }
 
   .philosophy li:last-child { border-bottom: none; }
 
-  /* ── sidebar ── */
-  .sidebar-block {
-    margin-bottom: 20px;
+  .philosophy li::before {
+    content: '— ';
+    color: var(--muted);
   }
+
+  /* ── sidebar ── */
+  .sidebar-block { margin-bottom: 22px; }
 
   .kv-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.78rem;
-    padding: 4px 0;
-    border-bottom: 1px dotted var(--border);
+    font-size: 0.85rem;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--border-d);
     gap: 1rem;
   }
 
   .kv-row:last-child { border-bottom: none; }
-
   .kv-key { color: var(--muted); flex-shrink: 0; }
   .kv-val { color: var(--text); text-align: right; }
 
@@ -259,11 +295,12 @@
     display: block;
     border: 1px solid var(--accent);
     color: var(--accent);
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 7px 11px;
+    font-size: 0.87rem;
+    font-family: var(--mono);
     text-align: center;
     text-decoration: none;
-    margin-top: 8px;
+    margin-top: 9px;
     background: transparent;
   }
 
@@ -273,30 +310,24 @@
     text-decoration: none;
   }
 
-  /* ── separator ── */
-  .sep {
-    border: none;
-    border-top: 1px dotted var(--border);
-    margin: 16px 0;
-  }
-
   /* ── footer ── */
   .site-footer {
-    padding: 8px 12px;
-    font-size: 0.7rem;
+    padding: 9px 14px;
+    font-size: 0.78rem;
     color: var(--muted);
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--border);
     background: var(--bg2);
   }
 
   /* ── responsive ── */
-  @media (max-width: 620px) {
+  @media (max-width: 640px) {
     .page-body { grid-template-columns: 1fr; }
     .col-main { border-right: none; border-bottom: 1px solid var(--border); }
     .app-table th:nth-child(3),
     .app-table td:nth-child(3) { display: none; }
+    .site-meta { display: none; }
   }
 </style>
 </head>
@@ -306,7 +337,7 @@
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <div class="site-meta">Apple platforms · iOS · macOS · tvOS</div>
+  <div class="site-meta">iOS · iPadOS · macOS · tvOS · watchOS</div>
 </header>
 
 <nav class="site-nav">
@@ -341,22 +372,22 @@
       </thead>
       <tbody>
         <tr>
-          <td class="muted" style="color:var(--muted)">001</td>
-          <td class="app-name-cell"><a href="#" title="App Store link — coming soon">ISSeeYou</a></td>
+          <td class="app-num">001</td>
+          <td class="app-name-cell"><a href="#" title="App Store — coming soon">ISSeeYou</a></td>
           <td class="platform-tag">iOS · iPadOS<br>macOS · tvOS</td>
           <td>Real-time ISS tracker. Know when and where to look up.</td>
           <td><span class="status-live">Live</span></td>
         </tr>
         <tr>
-          <td class="muted" style="color:var(--muted)">002</td>
-          <td class="app-name-cell"><a href="#" title="App Store link — coming soon">RakRak</a></td>
+          <td class="app-num">002</td>
+          <td class="app-name-cell"><a href="#" title="App Store — coming soon">RakRak</a></td>
           <td class="platform-tag">iOS · iPadOS</td>
           <td>Relationship date tracker. Keep track of moments that matter.</td>
           <td><span class="status-live">Live</span></td>
         </tr>
         <tr>
-          <td class="muted" style="color:var(--muted)">003</td>
-          <td class="app-name-cell" style="color:var(--muted)">ShiftPlanner</td>
+          <td class="app-num">003</td>
+          <td class="app-name-wip">ShiftPlanner</td>
           <td class="platform-tag">iOS · iPadOS<br>macOS</td>
           <td>Shift planning for Apple platforms.</td>
           <td><span class="status-wip">In dev</span></td>
@@ -366,7 +397,7 @@
 
     <hr class="sep">
 
-    <div class="section-head">Design principles</div>
+    <div class="section-head">Principles</div>
 
     <ul class="philosophy">
       <li>Small scope. One thing done well.</li>
@@ -390,14 +421,14 @@
 
     <div class="sidebar-block">
       <div class="section-head">Source</div>
-      <p style="font-size:0.78rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
       <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener">github.com/Bravosierra0 ↗</a>
     </div>
 
     <div class="sidebar-block">
-      <div class="section-head">Apps — quick links</div>
-      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#">App Store ↗</a></span></div>
-      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val"><a href="#">App Store ↗</a></span></div>
+      <div class="section-head">App Store</div>
+      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#">↗</a></span></div>
+      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val"><a href="#">↗</a></span></div>
       <div class="kv-row"><span class="kv-key">ShiftPlanner</span><span class="kv-val" style="color:var(--muted)">In dev</span></div>
     </div>
 
@@ -406,7 +437,7 @@
 </div>
 
 <footer class="site-footer">
-  <span>b347.dev — independent Apple platform developer</span>
+  <span>b347.dev</span>
   <span>Swift · SwiftUI · Xcode</span>
 </footer>
 

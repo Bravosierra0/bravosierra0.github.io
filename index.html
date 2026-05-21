@@ -24,7 +24,6 @@
 
   /* ── LIGHT MODE (default) ── */
   :root {
-    --page-bg:   #e6e6e6;
     --bg:        #f0eeea;
     --bg2:       #e8e6e2;
     --bg3:       #dddbd7;
@@ -42,7 +41,6 @@
   /* ── DARK MODE ── */
   @media (prefers-color-scheme: dark) {
     :root {
-      --page-bg:   #141414;
       --bg:        #1c1c1c;
       --bg2:       #252525;
       --bg3:       #2e2e2e;
@@ -59,7 +57,7 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { font-size: 15px; }
+  html { font-size: 16px; }
 
   body {
     background: var(--bg);
@@ -91,13 +89,12 @@
     );
   }
 
-  /* ── dotted block separator ── */
+  /* ── dot-rule ── */
   .dot-rule {
     height: 8px;
     background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
     background-size: 4px 4px;
     background-repeat: repeat;
-    margin: 0;
   }
 
   /* ── header ── */
@@ -134,7 +131,8 @@
   .site-nav a {
     display: block;
     padding: 6px 16px;
-    font-size: 0.87rem;
+    font-size: 0.875rem;
+    font-weight: 400;
     color: var(--text);
     border-right: 1px solid var(--border);
     text-decoration: none;
@@ -142,8 +140,7 @@
   }
 
   .site-nav a:hover { background: var(--bg3); color: var(--accent); }
-  .site-nav a.active { color: var(--accent); }
-  .site-nav a.active::before { content: '● '; font-size: 0.55rem; vertical-align: 2px; }
+  .site-nav a.active { color: var(--accent); font-weight: 700; }
 
   /* ── layout ── */
   .page-body {
@@ -166,14 +163,12 @@
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--text);
-    border-bottom: 1px solid var(--border);
     padding-bottom: 5px;
     margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
 
-  /* dot rule after section head */
   .section-head + .dot-rule {
     margin-bottom: 14px;
   }
@@ -198,7 +193,7 @@
   }
 
   .lead-body {
-    font-size: 0.87rem;
+    font-size: 0.875rem;
     color: var(--muted);
     line-height: 1.7;
   }
@@ -214,7 +209,7 @@
   .app-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.87rem;
+    font-size: 0.875rem;
     margin-bottom: 22px;
   }
 
@@ -226,7 +221,7 @@
     text-align: left;
     padding: 6px 10px 6px 0;
     color: var(--muted);
-    font-weight: 400;
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
@@ -245,7 +240,7 @@
   .app-name-cell { font-weight: 700; white-space: nowrap; }
   .app-name-cell a { color: var(--accent); }
   .app-name-wip { font-weight: 700; color: var(--muted); }
-  .platform-tag { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+  .platform-tag { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
 
   .status-live {
     display: inline-block;
@@ -277,7 +272,7 @@
 
   .philosophy li {
     list-style: none;
-    font-size: 0.87rem;
+    font-size: 0.875rem;
     padding: 6px 11px;
     border-bottom: 1px solid var(--border-d);
     color: var(--text);
@@ -293,7 +288,7 @@
   .kv-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     padding: 5px 0;
     border-bottom: 1px dotted var(--border-d);
     gap: 1rem;
@@ -308,7 +303,7 @@
     border: 1px solid var(--accent);
     color: var(--accent);
     padding: 7px 11px;
-    font-size: 0.87rem;
+    font-size: 0.875rem;
     font-family: var(--mono);
     text-align: center;
     text-decoration: none;
@@ -366,7 +361,6 @@
 
   .footer-rev {
     font-size: 0.72rem;
-    color: var(--text);
     border: 1px solid var(--border);
     padding: 2px 7px;
     letter-spacing: 0.08em;
@@ -392,7 +386,7 @@
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <div class="site-meta">iOS · iPadOS · macOS · tvOS · watchOS</div>
+  <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
 </header>
 
 <nav class="site-nav">
@@ -430,7 +424,7 @@
         <tr>
           <td class="app-num">001</td>
           <td class="app-name-cell"><a href="#" title="App Store — coming soon">ISSeeYou</a></td>
-          <td class="platform-tag">iOS · iPadOS<br>macOS · tvOS</td>
+          <td class="platform-tag">macOS · iOS<br>iPadOS · tvOS</td>
           <td>Real-time ISS tracker. Know when and where to look up.</td>
           <td><span class="status-live">Live</span></td>
         </tr>
@@ -444,7 +438,7 @@
         <tr>
           <td class="app-num">003</td>
           <td class="app-name-wip">ShiftPlanner</td>
-          <td class="platform-tag">iOS · iPadOS<br>macOS</td>
+          <td class="platform-tag">macOS · iOS<br>iPadOS</td>
           <td>Shift planning for Apple platforms.</td>
           <td><span class="status-wip">In dev</span></td>
         </tr>
@@ -480,7 +474,7 @@
     <div class="sidebar-block">
       <div class="section-head">Source</div>
       <div class="dot-rule"></div>
-      <p style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
+      <p style="font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
       <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener">github.com/Bravosierra0 ↗</a>
     </div>
 
@@ -499,7 +493,7 @@
 <footer class="site-footer">
   <div class="footer-dot-rule"></div>
   <div class="footer-inner">
-    <span class="footer-left">b347.dev — independent Apple platform developer</span>
+    <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
       <span class="footer-tag">REV</span>
       <span class="footer-rev">2026.05.21</span>

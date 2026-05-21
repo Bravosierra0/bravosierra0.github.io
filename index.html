@@ -1,60 +1,344 @@
-<!DOCTYPE HTML>
-<!--
--->
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>BravoSierra0</title>
-	<meta charset="utf-8" />
-	<meta name="description" content="Location : Earth”>
-	<meta name="keywords"
-		content=“abc”>
-	<meta name="robots" content="index, follow">
-	<meta http-equip="Content-Type" content="text/html; charset=utf-8">
-	<meta name="revisit-after" content="1 days">
-	<meta name="author" content=“BravoSierra0”>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="shortcut icon" href="assets/css/images/icon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>b347.dev</title>
+<meta name="description" content="Building small, focused apps for all Apple platforms.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f4f2ed;
+    --accent: #d4401a;
+    --mono: 'Courier New', Courier, monospace;
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+
+  header {
+    border-bottom: 2px solid var(--black);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .wordmark {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+  }
+
+  .wordmark span {
+    color: var(--accent);
+  }
+
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: #666;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  main {
+    padding: 0 2rem;
+  }
+
+  .hero {
+    border-bottom: 1px solid #ccc;
+    padding: 4rem 0 3rem;
+  }
+
+  .hero-tagline {
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+
+  .hero-tagline em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: #555;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero-sub::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: #999;
+    flex-shrink: 0;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 2rem;
+    padding-top: 2.5rem;
+  }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    border-top: 1px solid #ccc;
+  }
+
+  .app-card {
+    padding: 2rem 1.5rem 2rem 0;
+    border-right: 1px solid #ccc;
+    position: relative;
+  }
+
+  .app-card:last-child {
+    border-right: none;
+  }
+
+  .app-number {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: #bbb;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .app-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .app-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1.5rem;
+    max-width: 28ch;
+  }
+
+  .app-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 1.25rem;
+  }
+
+  .app-link {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--black);
+    padding: 0.4rem 0.75rem;
+    transition: background 0.1s, color 0.1s;
+  }
+
+  .app-link:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .app-wip .app-link {
+    border-color: #bbb;
+    color: #bbb;
+    pointer-events: none;
+  }
+
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 2px solid var(--black);
+    margin-top: 3rem;
+  }
+
+  .bottom-cell {
+    padding: 2rem 0;
+  }
+
+  .bottom-cell:first-child {
+    border-right: 1px solid #ccc;
+    padding-right: 2rem;
+  }
+
+  .bottom-cell:last-child {
+    padding-left: 2rem;
+  }
+
+  .bottom-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 0.75rem;
+  }
+
+  .github-link {
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid var(--black);
+    display: inline-block;
+    line-height: 1.3;
+    transition: color 0.1s, border-color 0.1s;
+  }
+
+  .github-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .platform-list {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+
+  footer {
+    border-top: 2px solid var(--black);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: #999;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .footer-stack {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: #bbb;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1rem; }
+    main { padding: 0 1rem; }
+    .hero { padding: 2.5rem 0 2rem; }
+    .bottom-row { grid-template-columns: 1fr; }
+    .bottom-cell:first-child { border-right: none; border-bottom: 1px solid #ccc; padding-right: 0; padding-bottom: 1.5rem; }
+    .bottom-cell:last-child { padding-left: 0; padding-top: 1.5rem; }
+    footer { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    .apps-grid { grid-template-columns: 1fr; }
+    .app-card { border-right: none; border-bottom: 1px solid #ccc; padding-right: 0; }
+    .app-card:last-child { border-bottom: none; }
+  }
+</style>
 </head>
+<body>
 
-<body class="Loading">
-	<div id="wrapper">
-		<div id="bg"></div>
-		<div id="overlay"></div>
-		<div id="main">
+<header>
+  <div class="wordmark">b<span>347</span>.dev</div>
+  <div class="header-meta">Apple platforms</div>
+</header>
 
-			<!-- Header -->
-			<header id="header">
-				<h1>BravoSierra0</h1>
-				<p>abc</p>
-				<nav>
-					<ul>
-						<li><a href="https://github.com/bravosierra0” class="icon fa-github" target="_blank"><span
-									class="label">Github</span></a></li>
-					</ul>
-				</nav>
-			</header>
+<main>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<span class="copyright">&copy;Design by <a href=""></a>.</span>
-			</footer>
+  <section class="hero">
+    <h1 class="hero-tagline">Building small,<br>focused apps for<br><em>all Apple</em><br>platforms.</h1>
+    <p class="hero-sub">iOS &nbsp;·&nbsp; iPadOS &nbsp;·&nbsp; macOS &nbsp;·&nbsp; watchOS &nbsp;·&nbsp; tvOS</p>
+  </section>
 
-		</div>
-	</div>
-	<script>
-		window.onload = function () {
-			document.body.className = '';
-		}
-		window.ontouchmove = function () {
-			return false;
-		}
-		window.onorientationchange = function () {
-			document.body.scrollTop = 0;
-		}
-	</script>
+  <div class="section-label">Apps</div>
+
+  <div class="apps-grid">
+
+    <div class="app-card">
+      <div class="app-number">001</div>
+      <div class="app-name">ISSeeYou</div>
+      <div class="app-tag">iOS · iPadOS · macOS · tvOS</div>
+      <p class="app-desc">Track the International Space Station in real time. Know exactly when and where to look up.</p>
+      <a href="#" class="app-link">App Store ↗</a>
+    </div>
+
+    <div class="app-card">
+      <div class="app-number">002</div>
+      <div class="app-name">RakRak</div>
+      <div class="app-tag">iOS · iPadOS</div>
+      <p class="app-desc">Relationship date tracker. Keep track of the moments that matter.</p>
+      <a href="#" class="app-link">App Store ↗</a>
+    </div>
+
+    <div class="app-card app-wip">
+      <div class="app-number">003</div>
+      <div class="app-name">ShiftPlanner</div>
+      <div class="app-tag">iOS · iPadOS · macOS</div>
+      <p class="app-desc">Shift planning for Apple platforms. In development.</p>
+      <a href="#" class="app-link">Coming soon</a>
+    </div>
+
+  </div>
+
+  <div class="bottom-row">
+    <div class="bottom-cell">
+      <div class="bottom-label">Source</div>
+      <a href="https://github.com/Bravosierra0" class="github-link" target="_blank" rel="noopener">github.com/<br>Bravosierra0</a>
+    </div>
+    <div class="bottom-cell">
+      <div class="bottom-label">Built with</div>
+      <div class="platform-list">
+        Swift<br>
+        SwiftUI<br>
+        Xcode<br>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span class="footer-copy">b347.dev</span>
+  <span class="footer-stack">Swift · SwiftUI · Xcode</span>
+</footer>
+
 </body>
-
 </html>

@@ -18,6 +18,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://b347.dev">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <style>
   @font-face {
     font-family: 'IoskeleyMono';
@@ -85,6 +87,21 @@
 
   html { font-size: 16px; scrollbar-gutter: stable; }
 
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 100;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -104,6 +121,13 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 
   .colorbar {
     height: 6px;
@@ -128,6 +152,7 @@
     align-items: center;
     justify-content: space-between;
     background: var(--bg2);
+    gap: 1rem;
   }
 
   .site-title {
@@ -138,6 +163,22 @@
   }
 
   .site-title span { color: var(--accent); }
+
+  .theme-toggle {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.6;
+  }
+
+  .theme-toggle:hover { color: var(--text); background: var(--border); }
 
   .site-nav {
     border-bottom: 2px solid var(--border);
@@ -244,10 +285,13 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <div class="colorbar"></div>
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">[ dark ]</button>
 </header>
 
 <nav class="site-nav">
@@ -270,6 +314,33 @@
     <span class="footer-code">404</span>
   </div>
 </footer>
+
+<script>
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    var html = document.documentElement;
+    function currentTheme() {
+      var stored = html.getAttribute('data-theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function updateBtn(theme) {
+      var next = theme === 'dark' ? 'light' : 'dark';
+      btn.textContent = '[ ' + next + ' ]';
+      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    }
+    updateBtn(currentTheme());
+    btn.addEventListener('click', function() {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch(e) {}
+      updateBtn(next);
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      try { if (!localStorage.getItem('theme')) updateBtn(e.matches ? 'dark' : 'light'); } catch(e) {}
+    });
+  })();
+</script>
 
 </body>
 </html>

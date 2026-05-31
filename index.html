@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- flash prevention: read stored theme before paint -->
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch(e) {}
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e6e2">
+<meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#252525">
 <title>b347.dev</title>
 <meta name="description" content="Building small, focused apps for all Apple platforms.">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://b347.dev">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="Fonts/IoskeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face {
     font-family: 'IoskeleyMono';
@@ -46,9 +61,9 @@
     --mono:      'IoskeleyMono', 'Courier New', Courier, monospace;
   }
 
-  /* ── DARK MODE ── */
+  /* ── DARK MODE via OS (only when no user override is set) ── */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme]) {
       --bg:        #1c1c1c;
       --bg2:       #252525;
       --bg3:       #2e2e2e;
@@ -63,9 +78,42 @@
     }
   }
 
+  /* ── DARK MODE via user toggle ── */
+  [data-theme="dark"] {
+    --bg:        #1c1c1c;
+    --bg2:       #252525;
+    --bg3:       #2e2e2e;
+    --border:    #3a3a3a;
+    --border-d:  #303030;
+    --text:      #d8d4cc;
+    --muted:     #7a7670;
+    --accent:    #e8b84b;
+    --green-bg:  #5a9e6f;
+    --green-fg:  #0d2214;
+    --dot-color: #3a3836;
+  }
+
+  /* ── LIGHT MODE via user toggle (override OS dark) ── */
+  [data-theme="light"] {
+    --bg:        #f0eeea;
+    --bg2:       #e8e6e2;
+    --bg3:       #dddbd7;
+    --border:    #b8b5b0;
+    --border-d:  #ccc9c4;
+    --text:      #1a1a1a;
+    --muted:     #6b6762;
+    --accent:    #c8960a;
+    --green-bg:  #2a6e3a;
+    --green-fg:  #e8f5eb;
+    --dot-color: #b0ada8;
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { font-size: 16px; }
+  html {
+    font-size: 16px;
+    scrollbar-gutter: stable;
+  }
 
   body {
     background: var(--bg);
@@ -81,6 +129,36 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+
+  /* ── skip link ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 100;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* ── focus indicators ── */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ── reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   a { color: var(--accent); text-decoration: none; }
@@ -113,6 +191,7 @@
     align-items: center;
     justify-content: space-between;
     background: var(--bg2);
+    gap: 1rem;
   }
 
   .site-title {
@@ -124,9 +203,36 @@
 
   .site-title span { color: var(--accent); }
 
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   .site-meta {
     font-size: 0.8rem;
     color: var(--muted);
+  }
+
+  /* ── theme toggle button ── */
+  .theme-toggle {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.6;
+    transition: color 0.1s, background 0.1s;
+  }
+
+  .theme-toggle:hover {
+    color: var(--text);
+    background: var(--border);
   }
 
   /* ── nav ── */
@@ -166,8 +272,8 @@
     padding: 18px 16px 28px;
   }
 
-  /* ── section head ── */
-  .section-head {
+  /* ── section heads (now h2) ── */
+  h2.section-head {
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--text);
@@ -175,9 +281,12 @@
     margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    /* reset h2 defaults */
+    font-family: var(--mono);
+    line-height: 1.55;
   }
 
-  .section-head + .dot-rule {
+  h2.section-head + .dot-rule {
     margin-bottom: 14px;
   }
 
@@ -220,6 +329,14 @@
     border-collapse: collapse;
     font-size: 0.875rem;
     margin-bottom: 22px;
+  }
+
+  .app-table caption {
+    text-align: left;
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-bottom: 6px;
+    letter-spacing: 0.04em;
   }
 
   .app-table thead tr {
@@ -391,14 +508,19 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <div class="colorbar"></div>
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
+  <div class="header-right">
+    <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">[ dark ]</button>
+  </div>
 </header>
 
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Primary">
   <a href="#" class="active">Overview</a>
   <a href="#apps">Apps</a>
   <a href="https://github.com/Bravosierra0" target="_blank" rel="noopener">GitHub ↗</a>
@@ -406,7 +528,7 @@
 
 <div class="page-body">
 
-  <main class="col-main">
+  <main class="col-main" id="main">
 
     <div class="lead-block">
       <p class="lead-line">— About</p>
@@ -416,30 +538,31 @@
 
     <hr class="sep">
 
-    <div class="section-head" id="apps">Apps</div>
+    <h2 class="section-head" id="apps">Apps</h2>
     <div class="dot-rule"></div>
 
     <table class="app-table">
+      <caption>Apps published or in development by b347.dev</caption>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Platforms</th>
-          <th>Description</th>
-          <th>Status</th>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Platforms</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="app-num">001</td>
-          <td class="app-name-cell"><a href="#" title="App Store — coming soon">ISSeeYou</a></td>
+          <td class="app-name-cell"><a href="#" aria-label="ISSeeYou on App Store — coming soon">ISSeeYou</a></td>
           <td class="platform-tag">macOS · iOS<br>iPadOS · tvOS</td>
           <td>Real-time ISS tracker. Know when and where to look up.</td>
           <td><span class="status-live">Live</span></td>
         </tr>
         <tr>
           <td class="app-num">002</td>
-          <td class="app-name-cell"><a href="#" title="App Store — coming soon">RakRak</a></td>
+          <td class="app-name-cell"><a href="#" aria-label="RakRak on App Store — coming soon">RakRak</a></td>
           <td class="platform-tag">iOS · iPadOS</td>
           <td>Relationship date tracker. Keep track of moments that matter.</td>
           <td><span class="status-live">Live</span></td>
@@ -456,7 +579,7 @@
 
     <hr class="sep">
 
-    <div class="section-head">Principles</div>
+    <h2 class="section-head">Principles</h2>
     <div class="dot-rule"></div>
 
     <ul class="philosophy">
@@ -468,10 +591,10 @@
 
   </main>
 
-  <aside class="col-side">
+  <aside class="col-side" aria-label="Details">
 
     <div class="sidebar-block">
-      <div class="section-head">Stack</div>
+      <h2 class="section-head">Stack</h2>
       <div class="dot-rule"></div>
       <div class="kv-row"><span class="kv-key">Language</span><span class="kv-val">Swift</span></div>
       <div class="kv-row"><span class="kv-key">UI</span><span class="kv-val">SwiftUI</span></div>
@@ -480,17 +603,17 @@
     </div>
 
     <div class="sidebar-block">
-      <div class="section-head">Source</div>
+      <h2 class="section-head">Source</h2>
       <div class="dot-rule"></div>
       <p style="font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
-      <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener">github.com/Bravosierra0 ↗</a>
+      <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener" aria-label="GitHub profile for Bravosierra0">github.com/Bravosierra0 ↗</a>
     </div>
 
     <div class="sidebar-block">
-      <div class="section-head">App Store</div>
+      <h2 class="section-head">App Store</h2>
       <div class="dot-rule"></div>
-      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#">↗</a></span></div>
-      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val"><a href="#">↗</a></span></div>
+      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#" aria-label="ISSeeYou on App Store">↗</a></span></div>
+      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val"><a href="#" aria-label="RakRak on App Store">↗</a></span></div>
       <div class="kv-row"><span class="kv-key">Oh Shift!</span><span class="kv-val" style="color:var(--muted)">In dev</span></div>
     </div>
 
@@ -504,10 +627,51 @@
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
       <span class="footer-tag">REV</span>
-      <span class="footer-rev">2026.05.21</span>
+      <span class="footer-rev">2026.05.31</span>
     </div>
   </div>
 </footer>
+
+<script>
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    var html = document.documentElement;
+
+    // determine effective current theme
+    function currentTheme() {
+      var stored = html.getAttribute('data-theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // update button label and aria-label to show what you switch TO
+    function updateBtn(theme) {
+      var next = theme === 'dark' ? 'light' : 'dark';
+      btn.textContent = '[ ' + next + ' ]';
+      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    }
+
+    // init button state
+    updateBtn(currentTheme());
+
+    // toggle on click
+    btn.addEventListener('click', function() {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch(e) {}
+      updateBtn(next);
+    });
+
+    // respond to OS change only when no user override stored
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      try {
+        if (!localStorage.getItem('theme')) {
+          updateBtn(e.matches ? 'dark' : 'light');
+        }
+      } catch(e) {}
+    });
+  })();
+</script>
 
 </body>
 </html>

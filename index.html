@@ -215,25 +215,72 @@
     color: var(--muted);
   }
 
-  /* ── theme toggle button ── */
+  /* ── theme toggle switch ── */
   .theme-toggle {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--muted);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     background: var(--bg3);
     border: 1px solid var(--border);
-    padding: 2px 7px;
+    padding: 3px 5px;
     cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.6;
-    transition: color 0.1s, background 0.1s;
+    font-size: 0.78rem;
+    line-height: 1;
+    color: var(--muted);
+    transition: border-color 0.15s;
+    flex-shrink: 0;
   }
 
-  .theme-toggle:hover {
-    color: var(--text);
-    background: var(--border);
+  .theme-toggle:hover { border-color: var(--accent); }
+
+  .theme-toggle__icon {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+  }
+
+  .theme-toggle__track {
+    position: relative;
+    width: 30px;
+    height: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle__dot {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    transition: transform 0.18s ease;
+  }
+
+  /* when dark mode is active, slide dot to right */
+  [data-theme="dark"] .theme-toggle__dot,
+  :not([data-theme]) .theme-toggle__dot {
+    transform: translateX(0);
+  }
+
+  /* detect OS dark when no override */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme-toggle__dot {
+      transform: translateX(16px);
+    }
+  }
+
+  [data-theme="dark"] .theme-toggle__dot {
+    transform: translateX(16px);
+  }
+
+  [data-theme="light"] .theme-toggle__dot {
+    transform: translateX(0);
   }
 
   /* ── nav ── */
@@ -517,7 +564,13 @@
   <div class="site-title">b<span>347</span>.dev</div>
   <div class="header-right">
     <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">[ dark ]</button>
+    <button class="theme-toggle" id="theme-toggle" role="switch" aria-checked="false" aria-label="Dark mode">
+      <span class="theme-toggle__icon" aria-hidden="true">☀</span>
+      <span class="theme-toggle__track">
+        <span class="theme-toggle__dot"></span>
+      </span>
+      <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+    </button>
   </div>
 </header>
 
@@ -645,11 +698,10 @@
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
-    // update button label and aria-label to show what you switch TO
+    // update toggle state: aria-checked=true means dark is ON
     function updateBtn(theme) {
-      var next = theme === 'dark' ? 'light' : 'dark';
-      btn.textContent = '[ ' + next + ' ]';
-      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+      var isDark = theme === 'dark';
+      btn.setAttribute('aria-checked', isDark ? 'true' : 'false');
     }
 
     // init button state

@@ -217,23 +217,19 @@
 
   /* ── theme toggle button ── */
   .theme-toggle {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 2px 7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #1c1c1c 50%, #f0eeea 50%);
+    border: 1.5px solid var(--border);
+    padding: 0;
     cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.6;
-    transition: color 0.1s, background 0.1s;
+    flex-shrink: 0;
+    transition: border-color 0.1s;
   }
 
   .theme-toggle:hover {
-    color: var(--text);
-    background: var(--border);
+    border-color: var(--accent);
   }
 
   /* ── nav ── */
@@ -517,7 +513,7 @@
   <div class="site-title">b<span>347</span>.dev</div>
   <div class="header-right">
     <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">[ dark ]</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
   </div>
 </header>
 
@@ -648,7 +644,6 @@
     // update button label and aria-label to show what you switch TO
     function updateBtn(theme) {
       var next = theme === 'dark' ? 'light' : 'dark';
-      btn.textContent = '[ ' + next + ' ]';
       btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
     }
 

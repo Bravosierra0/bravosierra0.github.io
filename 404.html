@@ -165,20 +165,20 @@
   .site-title span { color: var(--accent); }
 
   .theme-toggle {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 2px 7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #1c1c1c 50%, #f0eeea 50%);
+    border: 1.5px solid var(--border);
+    padding: 0;
     cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.6;
+    flex-shrink: 0;
+    transition: border-color 0.1s;
   }
 
-  .theme-toggle:hover { color: var(--text); background: var(--border); }
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
 
   .site-nav {
     border-bottom: 2px solid var(--border);
@@ -291,7 +291,7 @@
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">[ dark ]</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
 </header>
 
 <nav class="site-nav">
@@ -326,7 +326,6 @@
     }
     function updateBtn(theme) {
       var next = theme === 'dark' ? 'light' : 'dark';
-      btn.textContent = '[ ' + next + ' ]';
       btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
     }
     updateBtn(currentTheme());

@@ -22,19 +22,26 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="Fonts/IBMPlexMono-Text.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="Fonts/IoskeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face {
-    font-family: 'IBMPlexMono';
-    src: url('Fonts/IBMPlexMono-Text.woff2') format('woff2');
+    font-family: 'IoskeleyMono';
+    src: url('Fonts/IoskeleyMono-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: 'IBMPlexMono';
-    src: url('Fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    font-family: 'IoskeleyMono';
+    src: url('Fonts/IoskeleyMono-Bold.woff2') format('woff2');
     font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IoskeleyMonoCondensed';
+    src: url('Fonts/IoskeleyMono-Condensed.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
@@ -52,7 +59,7 @@
     --green-bg:  #2a6e3a;
     --green-fg:  #e8f5eb;
     --dot-color: #b0ada8;
-    --mono:      'IBMPlexMono', 'Courier New', Courier, monospace;
+    --mono:      'IoskeleyMono', 'Courier New', Courier, monospace;
   }
 
   /* ── DARK MODE via OS (only when no user override is set) ── */
@@ -204,12 +211,6 @@
     gap: 12px;
   }
 
-  .site-meta {
-    font-size: 0.8rem;
-    color: var(--muted);
-    font-family: var(--mono);
-  }
-
   /* ── theme toggle button ── */
   .theme-toggle {
     width: 20px;
@@ -304,7 +305,7 @@
   }
 
   .lead-body {
-    font-family: var(--mono);
+    font-family: 'IoskeleyMonoCondensed', 'Courier New', Courier, monospace;
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.7;
@@ -339,7 +340,7 @@
 
   .app-table th {
     text-align: left;
-    padding: 6px 10px 6px 0;
+    padding: 6px 28px 6px 0;
     color: var(--muted);
     font-weight: 700;
     font-size: 0.75rem;
@@ -349,41 +350,53 @@
   }
 
   .app-table td {
-    padding: 9px 10px 9px 0;
+    padding: 9px 28px 9px 0;
     vertical-align: top;
     border-bottom: 1px dotted var(--border-d);
     font-family: var(--mono);
+    line-height: 1.7rem;
   }
 
   .app-table tr:last-child td { border-bottom: none; }
 
-  .app-num { color: var(--muted); font-size: 0.8rem; }
   .app-name-cell { font-weight: 700; white-space: nowrap; }
   .app-name-cell a { color: var(--accent); }
-  .app-name-wip { font-weight: 700; color: var(--muted); }
-  .platform-tag { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+  .app-name-wip { font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .platform-tag { color: var(--muted); text-align: right; }
+  .app-table th:last-child,
+  .app-table td:last-child { text-align: right; padding-right: 0; }
+  .app-table th:nth-child(3),
+  .app-table td:nth-child(3) { padding-right: 10px; }
 
   .status-live {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     background: var(--green-bg);
     color: var(--green-fg);
-    font-size: 0.72rem;
-    padding: 1px 6px;
+    padding: 1px 9px;
+    border-radius: 999px;
     letter-spacing: 0.05em;
     font-weight: 700;
     font-family: var(--mono);
   }
 
+  .status-live::before { content: '●'; font-size: 0.7em; }
+
   .status-wip {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     background: var(--bg3);
     color: var(--muted);
-    font-size: 0.72rem;
-    padding: 1px 6px;
+    padding: 1px 9px;
+    border-radius: 999px;
     border: 1px solid var(--border);
     letter-spacing: 0.05em;
     font-family: var(--mono);
   }
+
+  .status-wip::before { content: '○'; font-size: 0.7em; }
 
   /* ── philosophy ── */
   .philosophy {
@@ -394,7 +407,8 @@
   .philosophy li {
     list-style: none;
     font-size: 0.875rem;
-    padding: 6px 11px;
+    padding: 6px 11px 6px calc(11px + 2ch);
+    text-indent: -2ch;
     border-bottom: 1px solid var(--border-d);
     color: var(--text);
     line-height: 1.5;
@@ -438,6 +452,40 @@
     background: var(--accent);
     color: var(--bg);
     text-decoration: none;
+  }
+
+  /* ── back to top ── */
+  .back-to-top {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent);
+    background: var(--bg2);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.15s, transform 0.15s, background 0.1s, color 0.1s;
+    z-index: 10;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    background: var(--accent);
+    color: var(--bg);
   }
 
   /* ── footer ── */
@@ -499,9 +547,8 @@
   @media (max-width: 640px) {
     .page-body { grid-template-columns: 1fr; }
     .col-main { border-right: none; border-bottom: 1px solid var(--border); }
-    .app-table th:nth-child(3),
-    .app-table td:nth-child(3) { display: none; }
-    .site-meta { display: none; }
+    .app-table th:nth-child(4),
+    .app-table td:nth-child(4) { display: none; }
     .footer-left { font-size: 0.7rem; }
   }
 </style>
@@ -515,7 +562,6 @@
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
   <div class="header-right">
-    <div class="site-meta">macOS · iOS · watchOS · iPadOS · tvOS</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
   </div>
 </header>
@@ -545,34 +591,30 @@
       <caption>Apps published or in development by b347.dev</caption>
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Platforms</th>
-          <th scope="col">Description</th>
           <th scope="col">Status</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Platforms</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="app-num">001</td>
-          <td class="app-name-cell"><a href="#" aria-label="ISSeeYou on App Store — coming soon">ISSeeYou</a></td>
-          <td class="platform-tag">macOS · iOS<br>iPadOS · tvOS</td>
+          <td><span class="status-live">Live</span></td>
+          <td class="app-name-cell"><a href="#" aria-label="ISSeeYou app page">ISSeeYou</a></td>
           <td>Real-time ISS tracker. Know when and where to look up.</td>
-          <td><span class="status-live">Live</span></td>
+          <td class="platform-tag">macOS iOS<br>iPadOS tvOS</td>
         </tr>
         <tr>
-          <td class="app-num">002</td>
-          <td class="app-name-cell"><a href="#" aria-label="RakRak on App Store — coming soon">RakRak</a></td>
-          <td class="platform-tag">iOS · iPadOS</td>
+          <td><span class="status-live">Live</span></td>
+          <td class="app-name-cell"><a href="#" aria-label="RakRak app page">RakRak</a></td>
           <td>Relationship date tracker. Keep track of moments that matter.</td>
-          <td><span class="status-live">Live</span></td>
+          <td class="platform-tag">iOS iPadOS</td>
         </tr>
         <tr>
-          <td class="app-num">003</td>
+          <td><span class="status-wip">Dev</span></td>
           <td class="app-name-wip">Oh Shift!</td>
-          <td class="platform-tag">macOS · iOS<br>iPadOS</td>
-          <td>Shift planning for Apple platforms.</td>
-          <td><span class="status-wip">In dev</span></td>
+          <td>Simple roster-calendar wrapper for general purpose shift planning.</td>
+          <td class="platform-tag">macOS iOS<br>iPadOS</td>
         </tr>
       </tbody>
     </table>
@@ -632,6 +674,8 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
 <script>
   (function() {
     var btn = document.getElementById('theme-toggle');
@@ -668,6 +712,20 @@
           updateBtn(e.matches ? 'dark' : 'light');
         }
       } catch(e) {}
+    });
+  })();
+</script>
+
+<script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   })();
 </script>

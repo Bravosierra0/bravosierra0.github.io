@@ -33,15 +33,43 @@
   }
   @font-face {
     font-family: 'IoskeleyMono';
+    src: url('Fonts/IoskeleyMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IoskeleyMono';
     src: url('Fonts/IoskeleyMono-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: 'IoskeleyMonoCondensed';
-    src: url('Fonts/IoskeleyMono-Condensed.woff2') format('woff2');
+    font-family: 'IBMPlexSans';
+    src: url('Fonts/IBMPlexSans-Variable.woff2') format('woff2');
     font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexSans';
+    src: url('Fonts/IBMPlexSans-Variable.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexSans';
+    src: url('Fonts/IBMPlexSans-Variable.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexSans';
+    src: url('Fonts/IBMPlexSans-Variable.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
@@ -60,6 +88,7 @@
     --green-fg:  #e8f5eb;
     --dot-color: #b0ada8;
     --mono:      'IoskeleyMono', 'Courier New', Courier, monospace;
+    --sans:      'IBMPlexSans', -apple-system, sans-serif;
   }
 
   /* ── DARK MODE via OS (only when no user override is set) ── */
@@ -120,7 +149,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--mono);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     max-width: 980px;
@@ -239,7 +268,7 @@
     display: block;
     padding: 6px 16px;
     font-size: 0.875rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text);
     border-right: 1px solid var(--border);
     text-decoration: none;
@@ -305,7 +334,7 @@
   }
 
   .lead-body {
-    font-family: 'IoskeleyMonoCondensed', 'Courier New', Courier, monospace;
+    font-family: var(--sans);
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.7;
@@ -412,7 +441,7 @@
     border-bottom: 1px solid var(--border-d);
     color: var(--text);
     line-height: 1.5;
-    font-family: var(--mono);
+    font-family: var(--sans);
   }
 
   .philosophy li:last-child { border-bottom: none; }
@@ -647,7 +676,7 @@
     <div class="sidebar-block">
       <h2 class="section-head">Source</h2>
       <div class="dot-rule"></div>
-      <p style="font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
+      <p style="font-family:var(--sans); font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
       <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener" aria-label="GitHub profile for Bravosierra0">github.com/Bravosierra0 ↗</a>
     </div>
 

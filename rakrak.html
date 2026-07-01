@@ -15,10 +15,10 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e6e2">
 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#252525">
-<title>b347.dev</title>
-<meta name="description" content="Building small, focused apps for all Apple platforms.">
+<title>RakRak — b347.dev</title>
+<meta name="description" content="Relationship date tracker for iPhone and iPad. Keep track of moments that matter.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://b347.dev">
+<link rel="canonical" href="https://b347.dev/rakrak.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
@@ -63,8 +63,6 @@
     --text:      #1a1a1a;
     --muted:     #6b6762;
     --accent:    #00695c;
-    --green-bg:  #2a6e3a;
-    --green-fg:  #e8f5eb;
     --tf-bg:     #0d84ff;
     --tf-fg:     #eaf4ff;
     --dot-color: #b0ada8;
@@ -83,8 +81,6 @@
       --text:      #d8d4cc;
       --muted:     #7a7670;
       --accent:    #80cbc4;
-      --green-bg:  #5a9e6f;
-      --green-fg:  #0d2214;
       --tf-bg:     #4da3ff;
       --tf-fg:     #0a1e33;
       --dot-color: #3a3836;
@@ -101,8 +97,6 @@
     --text:      #d8d4cc;
     --muted:     #7a7670;
     --accent:    #80cbc4;
-    --green-bg:  #5a9e6f;
-    --green-fg:  #0d2214;
     --tf-bg:     #4da3ff;
     --tf-fg:     #0a1e33;
     --dot-color: #3a3836;
@@ -118,8 +112,8 @@
     --text:      #1a1a1a;
     --muted:     #6b6762;
     --accent:    #00695c;
-    --green-bg:  #2a6e3a;
-    --green-fg:  #e8f5eb;
+    --tf-bg:     #0d84ff;
+    --tf-fg:     #eaf4ff;
     --dot-color: #b0ada8;
   }
 
@@ -264,22 +258,20 @@
   .site-nav a.active { color: var(--accent); font-weight: 700; }
 
   /* ── layout ── */
-  .page-body {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    flex: 1;
-  }
-
   .col-main {
-    border-right: 1px solid var(--border);
     padding: 18px 18px 28px;
+    max-width: 720px;
   }
 
-  .col-side {
-    padding: 18px 16px 28px;
+  /* ── breadcrumb ── */
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-family: var(--mono);
   }
 
-  /* ── section heads (now h2) ── */
+  /* ── section heads ── */
   h2.section-head {
     font-size: 0.8rem;
     font-weight: 700;
@@ -288,128 +280,31 @@
     margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    /* reset h2 defaults */
     font-family: var(--mono);
     line-height: 1.55;
   }
 
-  h2.section-head + .dot-rule {
-    margin-bottom: 14px;
-  }
+  h2.section-head + .dot-rule { margin-bottom: 14px; }
 
-  /* ── lead ── */
-  .lead-block { margin-bottom: 22px; }
-
-  .lead-line {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 9px;
-    font-family: var(--mono);
-  }
-
-  .lead-statement {
-    font-size: 1.05rem;
+  /* ── detail hero ── */
+  .detail-title {
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--text);
-    line-height: 1.5;
-    border-left: 3px solid var(--accent);
-    padding-left: 11px;
-    margin-bottom: 13px;
     font-family: var(--mono);
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
   }
 
-  .lead-body {
-    font-family: var(--sans);
+  .detail-tagline {
     font-size: 0.95rem;
     color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── separator ── */
-  .sep {
-    border: none;
-    border-top: 1px dotted var(--border);
-    margin: 18px 0;
-  }
-
-  /* ── app table ── */
-  .app-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.875rem;
-    margin-bottom: 22px;
-  }
-
-  .app-table caption {
-    text-align: left;
-    font-size: 0.75rem;
-    color: var(--muted);
-    padding-bottom: 6px;
-    letter-spacing: 0.04em;
-  }
-
-  .app-table thead tr {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .app-table th {
-    text-align: left;
-    padding: 6px 28px 6px 0;
-    color: var(--muted);
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
+    margin-bottom: 18px;
     font-family: var(--mono);
   }
-
-  .app-table td {
-    padding: 9px 28px 9px 0;
-    vertical-align: top;
-    border-bottom: 1px dotted var(--border-d);
-    font-family: var(--mono);
-    line-height: 1.7rem;
-  }
-
-  .app-table tr:last-child td { border-bottom: none; }
-
-  .app-name-cell { font-weight: 700; white-space: nowrap; }
-  .app-name-cell a { color: var(--accent); }
-  .platform-tag { color: var(--muted); text-align: right; }
-  .app-table th:last-child,
-  .app-table td:last-child { text-align: right; padding-right: 0; }
-  .app-table th:nth-child(3),
-  .app-table td:nth-child(3) { padding-right: 10px; }
-
-  .status-live {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--green-bg);
-    color: var(--green-fg);
-    padding: 1px 9px;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    font-family: var(--mono);
-  }
-
-  .status-live::before { content: '●'; font-size: 0.7em; }
-
-  .status-wip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--bg3);
-    color: var(--muted);
-    padding: 1px 9px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    letter-spacing: 0.05em;
-    font-family: var(--mono);
-  }
-
-  .status-wip::before { content: '○'; font-size: 0.7em; }
 
   .status-testflight {
     display: inline-flex;
@@ -422,61 +317,152 @@
     letter-spacing: 0.05em;
     font-weight: 700;
     font-family: var(--mono);
-  }
-  
-  .status-testflight::before { content: '◐'; font-size: 0.7em; }
-  
-  /* ── philosophy ── */
-  .philosophy {
-    border: 1px solid var(--border);
-    background: var(--bg2);
+    font-size: 0.75rem;
   }
 
-  .philosophy li {
-    list-style: none;
-    font-size: 0.875rem;
-    padding: 6px 11px 6px calc(11px + 2ch);
-    text-indent: -2ch;
-    border-bottom: 1px solid var(--border-d);
-    color: var(--text);
-    line-height: 1.5;
+  .status-testflight::before { content: '◐'; font-size: 0.7em; }
+
+  /* ── spec plate ── */
+  .spec-plate {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    margin-bottom: 20px;
+  }
+
+  .spec-cell {
+    padding: 10px 14px;
+    border-right: 1px dotted var(--border-d);
+  }
+
+  .spec-cell:last-child { border-right: none; }
+
+  .spec-key {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .spec-val { font-size: 0.9rem; font-weight: 700; }
+
+  /* ── instrument panel (signature element) ── */
+  .instrument-panel {
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 14px 16px 16px;
+    margin-bottom: 8px;
+  }
+
+  .instrument-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .instrument-label::before {
+    content: '●';
+    color: var(--tf-bg);
+    font-size: 0.65em;
+  }
+
+  .readout-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 24px;
+  }
+
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--border-d);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .readout-row:nth-last-child(-n+2) { border-bottom: none; }
+
+  .readout-key {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .readout-val {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .instrument-note {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 14px 0 22px;
     font-family: var(--sans);
   }
 
-  .philosophy li:last-child { border-bottom: none; }
-  .philosophy li::before { content: '— '; color: var(--muted); }
+  /* ── separator ── */
+  .sep {
+    border: none;
+    border-top: 1px dotted var(--border);
+    margin: 18px 0;
+  }
 
-  /* ── sidebar ── */
-  .sidebar-block { margin-bottom: 22px; }
+  /* ── body copy ── */
+  .detail-body {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
 
-  .kv-row {
+  .detail-body strong { color: var(--text); }
+
+  /* ── revision history ── */
+  .revision-list { list-style: none; }
+
+  .revision-list li {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.875rem;
-    padding: 5px 0;
+    gap: 14px;
+    padding: 7px 0;
     border-bottom: 1px dotted var(--border-d);
-    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .revision-list li:last-child { border-bottom: none; }
+
+  .rev-num {
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
     font-family: var(--mono);
   }
 
-  .kv-row:last-child { border-bottom: none; }
-  .kv-key { color: var(--muted); flex-shrink: 0; }
-  .kv-val { color: var(--text); text-align: right; }
+  .rev-note { color: var(--text); font-family: var(--sans); }
 
-  .github-btn {
-    display: block;
+  /* ── store cta ── */
+  .store-btn {
+    display: inline-block;
     border: 1px solid var(--accent);
     color: var(--accent);
-    padding: 7px 11px;
+    padding: 8px 16px;
     font-size: 0.875rem;
     font-family: var(--mono);
+    font-weight: 700;
     text-align: center;
     text-decoration: none;
-    margin-top: 9px;
+    margin-top: 22px;
     background: transparent;
   }
 
-  .github-btn:hover {
+  .store-btn:hover {
     background: var(--accent);
     color: var(--bg);
     text-decoration: none;
@@ -573,10 +559,12 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
-    .page-body { grid-template-columns: 1fr; }
-    .col-main { border-right: none; border-bottom: 1px solid var(--border); }
-    .app-table th:nth-child(4),
-    .app-table td:nth-child(4) { display: none; }
+    .spec-plate { grid-template-columns: 1fr; }
+    .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
+    .spec-cell:last-child { border-bottom: none; }
+    .readout-grid { grid-template-columns: 1fr; }
+    .readout-row:nth-last-child(-n+2) { border-bottom: 1px dotted var(--border-d); }
+    .readout-row:last-child { border-bottom: none; }
     .footer-left { font-size: 0.7rem; }
   }
 </style>
@@ -588,108 +576,81 @@
 <div class="colorbar"></div>
 
 <header class="site-header">
-  <div class="site-title">b<span>347</span>.dev</div>
+  <div class="site-title"><a href="index.html" style="color:inherit;text-decoration:none;">b<span>347</span>.dev</a></div>
   <div class="header-right">
     <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
   </div>
 </header>
 
 <nav class="site-nav" aria-label="Primary">
-  <a href="#" class="active">Overview</a>
-  <a href="#apps">Apps</a>
+  <a href="index.html">Overview</a>
+  <a href="index.html#apps" class="active">Apps</a>
   <a href="https://github.com/Bravosierra0" target="_blank" rel="noopener">GitHub ↗</a>
 </nav>
 
-<div class="page-body">
+<main class="col-main" id="main">
 
-  <main class="col-main" id="main">
+  <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
 
-    <div class="lead-block">
-      <p class="lead-line">— About</p>
-      <p class="lead-statement">Building small, focused apps for all Apple platforms.</p>
-      <p class="lead-body">Independent developer. Swift and SwiftUI. The apps here are things I wanted to exist and decided to build myself. Small team of one, which means slow and deliberate — but every decision has a reason.</p>
+  <h1 class="detail-title">RakRak <span class="status-testflight">TestFlight</span></h1>
+  <p class="detail-tagline">Relationship date tracker. Keep track of moments that matter.</p>
+
+  <div class="spec-plate">
+    <div class="spec-cell">
+      <div class="spec-key">Platforms</div>
+      <div class="spec-val">iOS, iPadOS</div>
     </div>
-
-    <hr class="sep">
-
-    <h2 class="section-head" id="apps">Apps</h2>
-    <div class="dot-rule"></div>
-
-    <table class="app-table">
-      <caption>Apps published or in development by b347.dev</caption>
-      <thead>
-        <tr>
-          <th scope="col">Status</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Platforms</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="status-live">Live</span></td>
-          <td class="app-name-cell"><a href="isseeyou.html" aria-label="ISSeeYou app page">ISSeeYou</a></td>
-          <td>Real-time ISS tracker. Know when and where to look up.</td>
-          <td class="platform-tag">macOS iOS<br>iPadOS tvOS</td>
-        </tr>
-        <tr>
-          <td><span class="status-testflight">TestFlight</span></td>
-          <td class="app-name-cell"><a href="rakrak.html" aria-label="RakRak app page">RakRak</a></td>
-          <td>Relationship date tracker. Keep track of moments that matter.</td>
-          <td class="platform-tag">iOS iPadOS</td>
-        </tr>
-        <tr>
-          <td><span class="status-testflight">TestFlight</span></td>
-          <td class="app-name-cell"><a href="oh-shift.html" aria-label="Oh Shift! app page">Oh Shift!</a></td>
-          <td>Simple roster-calendar wrapper for general purpose shift planning.</td>
-          <td class="platform-tag">macOS iOS<br>iPadOS</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <hr class="sep">
-
-    <h2 class="section-head">Principles</h2>
-    <div class="dot-rule"></div>
-
-    <ul class="philosophy">
-      <li>Small tools outlast ambitious ones.</li>
-      <li>No cloud. No account. No excuse.</li>
-      <li>Platform conventions exist for a reason. Follow them.</li>
-      <li>Boring is reliable.</li>
-    </ul>
-
-  </main>
-
-  <aside class="col-side" aria-label="Details">
-
-    <div class="sidebar-block">
-      <h2 class="section-head">Stack</h2>
-      <div class="dot-rule"></div>
-      <div class="kv-row"><span class="kv-key">Language</span><span class="kv-val">Swift</span></div>
-      <div class="kv-row"><span class="kv-key">UI</span><span class="kv-val">SwiftUI</span></div>
-      <div class="kv-row"><span class="kv-key">IDE</span><span class="kv-val">Xcode</span></div>
-      <div class="kv-row"><span class="kv-key">Distribution</span><span class="kv-val">App Store · Direct</span></div>
+    <div class="spec-cell">
+      <div class="spec-key">Category</div>
+      <div class="spec-val">Personal</div>
     </div>
-
-    <div class="sidebar-block">
-      <h2 class="section-head">Source</h2>
-      <div class="dot-rule"></div>
-      <p style="font-family:var(--sans); font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
-      <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener" aria-label="GitHub profile for Bravosierra0">github.com/Bravosierra0 ↗</a>
+    <div class="spec-cell">
+      <div class="spec-key">Distribution</div>
+      <div class="spec-val">TestFlight</div>
     </div>
+  </div>
 
-    <div class="sidebar-block">
-      <h2 class="section-head">App Store</h2>
-      <div class="dot-rule"></div>
-      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#" aria-label="ISSeeYou on App Store">↗</a></span></div>
-      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
-      <div class="kv-row"><span class="kv-key">Oh Shift!</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
+  <div class="instrument-panel" aria-hidden="true">
+    <div class="instrument-label">Sample tally</div>
+    <div class="readout-grid">
+      <div class="readout-row">
+        <span class="readout-key">Days together</span>
+        <span class="readout-val">1,842</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Next anniversary</span>
+        <span class="readout-val">in 23 days</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Moments logged</span>
+        <span class="readout-val">96</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Last entry</span>
+        <span class="readout-val">4 days ago</span>
+      </div>
     </div>
+  </div>
+  <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
 
-  </aside>
+  <hr class="sep">
 
-</div>
+  <p class="detail-body">RakRak keeps the dates that actually matter to you in one place — anniversaries, first meetings, small moments worth remembering — and counts down or up so you're never caught off guard.</p>
+  <p class="detail-body">No account, no cloud sync, no ads. Everything stays on your device.</p>
+
+  <hr class="sep">
+
+  <h2 class="section-head">Revision history</h2>
+  <div class="dot-rule"></div>
+  <ul class="revision-list">
+    <li><span class="rev-num">0.4.0</span><span class="rev-note">Home Screen widget added</span></li>
+    <li><span class="rev-num">0.3.0</span><span class="rev-note">iPad layout refined</span></li>
+    <li><span class="rev-num">0.2.0</span><span class="rev-note">Initial TestFlight build</span></li>
+  </ul>
+
+  <a href="#" class="store-btn" aria-label="Join the RakRak TestFlight beta">Join the TestFlight beta →</a>
+
+</main>
 
 <footer class="site-footer">
   <div class="footer-dot-rule"></div>
@@ -709,23 +670,19 @@
     var btn = document.getElementById('theme-toggle');
     var html = document.documentElement;
 
-    // determine effective current theme
     function currentTheme() {
       var stored = html.getAttribute('data-theme');
       if (stored) return stored;
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
-    // update button label and aria-label to show what you switch TO
     function updateBtn(theme) {
       var next = theme === 'dark' ? 'light' : 'dark';
       btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
     }
 
-    // init button state
     updateBtn(currentTheme());
 
-    // toggle on click
     btn.addEventListener('click', function() {
       var next = currentTheme() === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
@@ -733,7 +690,6 @@
       updateBtn(next);
     });
 
-    // respond to OS change only when no user override stored
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
       try {
         if (!localStorage.getItem('theme')) {

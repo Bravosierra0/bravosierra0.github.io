@@ -65,6 +65,8 @@
     --accent:    #00695c;
     --green-bg:  #2a6e3a;
     --green-fg:  #e8f5eb;
+    --tf-bg:     #0d84ff;
+    --tf-fg:     #eaf4ff;
     --dot-color: #b0ada8;
     --mono:      'IBMPlexMono', monospace;
     --sans:      'IBMPlexSans', sans-serif;
@@ -83,6 +85,8 @@
       --accent:    #80cbc4;
       --green-bg:  #5a9e6f;
       --green-fg:  #0d2214;
+      --tf-bg:     #4da3ff;
+      --tf-fg:     #0a1e33;
       --dot-color: #3a3836;
     }
   }
@@ -99,6 +103,8 @@
     --accent:    #80cbc4;
     --green-bg:  #5a9e6f;
     --green-fg:  #0d2214;
+    --tf-bg:     #4da3ff;
+    --tf-fg:     #0a1e33;
     --dot-color: #3a3836;
   }
 
@@ -406,6 +412,21 @@
 
   .status-wip::before { content: '○'; font-size: 0.7em; }
 
+  .status-testflight {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--tf-bg);
+    color: var(--tf-fg);
+    padding: 1px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  
+  .status-testflight::before { content: '◐'; font-size: 0.7em; }
+  
   /* ── philosophy ── */
   .philosophy {
     border: 1px solid var(--border);
@@ -613,13 +634,13 @@
           <td class="platform-tag">macOS iOS<br>iPadOS tvOS</td>
         </tr>
         <tr>
-          <td><span class="status-live">Live</span></td>
+          <td><span class="status-testflight">TestFlight</span></td>
           <td class="app-name-cell"><a href="#" aria-label="RakRak app page">RakRak</a></td>
           <td>Relationship date tracker. Keep track of moments that matter.</td>
           <td class="platform-tag">iOS iPadOS</td>
         </tr>
         <tr>
-          <td><span class="status-wip">Dev</span></td>
+          <td><span class="status-testflight">TestFlight</span></td>
           <td class="app-name-wip">Oh Shift!</td>
           <td>Simple roster-calendar wrapper for general purpose shift planning.</td>
           <td class="platform-tag">macOS iOS<br>iPadOS</td>

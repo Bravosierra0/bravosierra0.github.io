@@ -204,7 +204,7 @@
   }
 
   .site-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.01em;
@@ -260,15 +260,7 @@
   /* ── layout ── */
   .col-main {
     padding: 18px 18px 28px;
-  }
-
-  .detail-column {
     max-width: 720px;
-  }
-
-  .detail-narrow {
-    max-width: 640px;
-    margin-inline: auto;
   }
 
   /* ── breadcrumb ── */
@@ -281,7 +273,7 @@
 
   /* ── section heads ── */
   h2.section-head {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
     padding-bottom: 5px;
@@ -294,9 +286,12 @@
 
   h2.section-head + .dot-rule { margin-bottom: 14px; }
 
+  /* secondary heading tier: revision history */
+  h2.section-head.section-head-sm { font-size: 0.8rem; }
+
   /* ── detail hero ── */
   .detail-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--mono);
     letter-spacing: 0.01em;
@@ -333,30 +328,18 @@
   /* ── spec plate ── */
   .spec-plate {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 8px 24px;
-  }
-
-  .spec-cell {
-    padding: 10px 0;
-  }
-
-  /* ── meta band (full-bleed wrapper for spec-plate) ── */
-  .meta-band {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
     background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
   }
 
-  .meta-band-inner {
-    max-width: 980px;
-    margin-inline: auto;
-    padding: 16px 18px;
+  .spec-cell {
+    padding: 10px 14px;
+    border-right: 1px dotted var(--border-d);
   }
+
+  .spec-cell:last-child { border-right: none; }
 
   .spec-key {
     font-size: 0.68rem;
@@ -419,7 +402,7 @@
   }
 
   .week-cell .day-mark {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 700;
   }
 
@@ -541,14 +524,6 @@
     background: var(--bg2);
   }
 
-  .footer-dot-rule {
-    height: 6px;
-    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
-    border-bottom: 1px solid var(--border);
-  }
-
   .footer-inner {
     padding: 7px 14px;
     display: flex;
@@ -592,6 +567,9 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
+    .spec-plate { grid-template-columns: 1fr; }
+    .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
+    .spec-cell:last-child { border-bottom: none; }
     .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
     .week-cell .day-label { font-size: 0.55rem; }
     .footer-left { font-size: 0.7rem; }
@@ -619,71 +597,60 @@
 
 <main class="col-main" id="main">
 
-  <div class="detail-column">
-    <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
+  <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
 
-    <h1 class="detail-title">Oh Shift! <span class="status-testflight">TestFlight</span></h1>
-    <p class="detail-tagline">Simple roster-calendar wrapper for general purpose shift planning.</p>
+  <h1 class="detail-title">Oh Shift! <span class="status-testflight">TestFlight</span></h1>
+  <p class="detail-tagline">Simple roster-calendar wrapper for general purpose shift planning.</p>
+
+  <div class="spec-plate">
+    <div class="spec-cell">
+      <div class="spec-key">Platforms</div>
+      <div class="spec-val">macOS, iOS, iPadOS</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Category</div>
+      <div class="spec-val">Productivity</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Distribution</div>
+      <div class="spec-val">TestFlight</div>
+    </div>
   </div>
 
-  <aside class="meta-band" aria-label="Specifications">
-    <div class="meta-band-inner">
-      <div class="spec-plate">
-        <div class="spec-cell">
-          <div class="spec-key">Platforms</div>
-          <div class="spec-val">macOS, iOS, iPadOS</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Category</div>
-          <div class="spec-val">Productivity</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Distribution</div>
-          <div class="spec-val">TestFlight</div>
-        </div>
-      </div>
+  <div class="instrument-panel" aria-hidden="true">
+    <div class="instrument-label">Sample roster</div>
+    <div class="week-grid">
+      <div class="week-cell filled"><span class="day-label">Mon</span><span class="day-mark">●</span></div>
+      <div class="week-cell filled"><span class="day-label">Tue</span><span class="day-mark">●</span></div>
+      <div class="week-cell"><span class="day-label">Wed</span><span class="day-mark">—</span></div>
+      <div class="week-cell filled"><span class="day-label">Thu</span><span class="day-mark">●</span></div>
+      <div class="week-cell filled"><span class="day-label">Fri</span><span class="day-mark">●</span></div>
+      <div class="week-cell"><span class="day-label">Sat</span><span class="day-mark">—</span></div>
+      <div class="week-cell"><span class="day-label">Sun</span><span class="day-mark">—</span></div>
     </div>
-  </aside>
-
-  <div class="detail-column">
-    <div class="instrument-panel" aria-hidden="true">
-      <div class="instrument-label">Sample roster</div>
-      <div class="week-grid">
-        <div class="week-cell filled"><span class="day-label">Mon</span><span class="day-mark">●</span></div>
-        <div class="week-cell filled"><span class="day-label">Tue</span><span class="day-mark">●</span></div>
-        <div class="week-cell"><span class="day-label">Wed</span><span class="day-mark">—</span></div>
-        <div class="week-cell filled"><span class="day-label">Thu</span><span class="day-mark">●</span></div>
-        <div class="week-cell filled"><span class="day-label">Fri</span><span class="day-mark">●</span></div>
-        <div class="week-cell"><span class="day-label">Sat</span><span class="day-mark">—</span></div>
-        <div class="week-cell"><span class="day-label">Sun</span><span class="day-mark">—</span></div>
-      </div>
-    </div>
-    <p class="instrument-note">Illustrative week — your own roster and shift pattern populate this on device.</p>
-
-    <hr class="sep">
-
-    <div class="detail-narrow">
-      <p class="detail-body">Oh Shift! wraps your work roster in a plain calendar view, so shifts show up alongside everything else you've got on. No separate app to check, no manual copying dates across.</p>
-      <p class="detail-body">No account, no cloud sync, no ads. Your roster stays on your device.</p>
-    </div>
-
-    <hr class="sep">
-
-    <h2 class="section-head">Revision history</h2>
-    <div class="dot-rule"></div>
-    <ul class="revision-list">
-      <li><span class="rev-num">0.3.0</span><span class="rev-note">Recurring shift patterns added</span></li>
-      <li><span class="rev-num">0.2.0</span><span class="rev-note">macOS build added</span></li>
-      <li><span class="rev-num">0.1.0</span><span class="rev-note">Initial TestFlight build</span></li>
-    </ul>
-
-    <a href="#" class="store-btn" aria-label="Join the Oh Shift! TestFlight beta">Join the TestFlight beta →</a>
   </div>
+  <p class="instrument-note">Illustrative week — your own roster and shift pattern populate this on device.</p>
+
+  <hr class="sep">
+
+  <p class="detail-body">Oh Shift! wraps your work roster in a plain calendar view, so shifts show up alongside everything else you've got on. No separate app to check, no manual copying dates across.</p>
+  <p class="detail-body">No account, no cloud sync, no ads. Your roster stays on your device.</p>
+
+  <hr class="sep">
+
+  <h2 class="section-head section-head-sm">Revision history</h2>
+  <div class="dot-rule"></div>
+  <ul class="revision-list">
+    <li><span class="rev-num">0.3.0</span><span class="rev-note">Recurring shift patterns added</span></li>
+    <li><span class="rev-num">0.2.0</span><span class="rev-note">macOS build added</span></li>
+    <li><span class="rev-num">0.1.0</span><span class="rev-note">Initial TestFlight build</span></li>
+  </ul>
+
+  <a href="#" class="store-btn" aria-label="Join the Oh Shift! TestFlight beta">Join the TestFlight beta →</a>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-dot-rule"></div>
   <div class="footer-inner">
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
@@ -691,6 +658,7 @@
       <span class="footer-rev">2026.05.31</span>
     </div>
   </div>
+  <div class="colorbar"></div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>

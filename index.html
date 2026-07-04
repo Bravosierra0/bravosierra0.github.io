@@ -52,6 +52,13 @@
     font-style: normal;
     font-display: swap;
   }
+  @font-face {
+    font-family: 'IBMPlexSans';
+    src: url('Fonts/IBMPlexSans-MediumItalic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
 
   /* ── LIGHT MODE (default) ── */
   :root {
@@ -210,7 +217,7 @@
   }
 
   .site-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.01em;
@@ -265,16 +272,23 @@
 
   /* ── layout ── */
   .page-body {
+    display: grid;
+    grid-template-columns: 1fr 300px;
     flex: 1;
   }
 
   .col-main {
+    border-right: 1px solid var(--border);
     padding: 18px 18px 28px;
+  }
+
+  .col-side {
+    padding: 18px 16px 28px;
   }
 
   /* ── section heads (now h2) ── */
   h2.section-head {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
     padding-bottom: 5px;
@@ -288,6 +302,11 @@
 
   h2.section-head + .dot-rule {
     margin-bottom: 14px;
+  }
+
+  /* secondary heading tier: sidebar panels */
+  h2.section-head.section-head-sm {
+    font-size: 0.8rem;
   }
 
   /* ── lead ── */
@@ -368,7 +387,7 @@
 
   .app-name-cell { font-weight: 700; white-space: nowrap; }
   .app-name-cell a { color: var(--accent); }
-  .platform-tag { color: var(--muted); text-align: right; }
+  .platform-tag { color: var(--muted); text-align: right; opacity: 0.7; }
   .app-table th:last-child,
   .app-table td:last-child { text-align: right; padding-right: 0; }
   .app-table th:nth-child(3),
@@ -419,12 +438,6 @@
   
   .status-testflight::before { content: '◐'; font-size: 0.7em; }
   
-  /* ── narrow section (alignment contrast) ── */
-  .narrow-section {
-    max-width: 560px;
-    margin-inline: auto;
-  }
-
   /* ── philosophy ── */
   .philosophy {
     border: 1px solid var(--border);
@@ -433,7 +446,8 @@
 
   .philosophy li {
     list-style: none;
-    font-size: 0.875rem;
+    font-size: 1rem;
+    font-style: italic;
     padding: 6px 11px 6px calc(11px + 2ch);
     text-indent: -2ch;
     border-bottom: 1px solid var(--border-d);
@@ -443,28 +457,10 @@
   }
 
   .philosophy li:last-child { border-bottom: none; }
-  .philosophy li::before { content: '— '; color: var(--muted); }
-
-  /* ── meta band (replaces the old sidebar column) ── */
-  .meta-band {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-  }
-
-  .meta-band-inner {
-    max-width: 980px;
-    margin-inline: auto;
-    padding: 22px 18px 28px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-  }
+  .philosophy li::before { content: '— '; color: var(--muted); font-style: normal; }
 
   /* ── sidebar ── */
-  .sidebar-block { margin-bottom: 0; }
+  .sidebar-block { margin-bottom: 22px; }
 
   .kv-row {
     display: flex;
@@ -539,14 +535,6 @@
     background: var(--bg2);
   }
 
-  .footer-dot-rule {
-    height: 6px;
-    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
-    border-bottom: 1px solid var(--border);
-  }
-
   .footer-inner {
     padding: 7px 14px;
     display: flex;
@@ -590,6 +578,8 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
+    .page-body { grid-template-columns: 1fr; }
+    .col-main { border-right: none; border-bottom: 1px solid var(--border); }
     .app-table th:nth-child(4),
     .app-table td:nth-child(4) { display: none; }
     .footer-left { font-size: 0.7rem; }
@@ -645,73 +635,68 @@
           <td><span class="status-live">Live</span></td>
           <td class="app-name-cell"><a href="isseeyou.html" aria-label="ISSeeYou app page">ISSeeYou</a></td>
           <td>Real-time ISS tracker. Know when and where to look up.</td>
-          <td class="platform-tag">macOS iOS<br>iPadOS tvOS</td>
+          <td class="platform-tag">macOS, iOS, iPadOS, tvOS</td>
         </tr>
         <tr>
           <td><span class="status-testflight">TestFlight</span></td>
           <td class="app-name-cell"><a href="rakrak.html" aria-label="RakRak app page">RakRak</a></td>
           <td>Relationship date tracker. Keep track of moments that matter.</td>
-          <td class="platform-tag">iOS iPadOS</td>
+          <td class="platform-tag">iOS, iPadOS</td>
         </tr>
         <tr>
           <td><span class="status-testflight">TestFlight</span></td>
           <td class="app-name-cell"><a href="oh-shift.html" aria-label="Oh Shift! app page">Oh Shift!</a></td>
-          <td>Simple roster-calendar wrapper for general purpose shift planning.</td>
-          <td class="platform-tag">macOS iOS<br>iPadOS</td>
+          <td>Roster-calendar wrapper for general purpose shift planning.</td>
+          <td class="platform-tag">macOS, iOS, iPadOS</td>
         </tr>
       </tbody>
     </table>
 
     <hr class="sep">
 
-    <div class="narrow-section">
-      <h2 class="section-head">Principles</h2>
-      <div class="dot-rule"></div>
+    <h2 class="section-head">Principles</h2>
+    <div class="dot-rule"></div>
 
-      <ul class="philosophy">
-        <li>Small tools outlast ambitious ones.</li>
-        <li>No cloud. No account. No excuse.</li>
-        <li>Platform conventions exist for a reason. Follow them.</li>
-        <li>Boring is reliable.</li>
-      </ul>
-    </div>
+    <ul class="philosophy">
+      <li>Small tools outlast ambitious ones.</li>
+      <li>No cloud. No account. No excuse.</li>
+      <li>Platform conventions exist for a reason. Follow them.</li>
+      <li>Boring is reliable.</li>
+    </ul>
 
   </main>
 
-  <aside class="meta-band" aria-label="Details">
-    <div class="meta-band-inner">
+  <aside class="col-side" aria-label="Details">
 
-      <div class="sidebar-block">
-        <h2 class="section-head">Stack</h2>
-        <div class="dot-rule"></div>
-        <div class="kv-row"><span class="kv-key">Language</span><span class="kv-val">Swift</span></div>
-        <div class="kv-row"><span class="kv-key">UI</span><span class="kv-val">SwiftUI</span></div>
-        <div class="kv-row"><span class="kv-key">IDE</span><span class="kv-val">Xcode</span></div>
-        <div class="kv-row"><span class="kv-key">Distribution</span><span class="kv-val">App Store · Direct</span></div>
-      </div>
-
-      <div class="sidebar-block">
-        <h2 class="section-head">Source</h2>
-        <div class="dot-rule"></div>
-        <p style="font-family:var(--sans); font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
-        <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener" aria-label="GitHub profile for Bravosierra0">github.com/Bravosierra0 ↗</a>
-      </div>
-
-      <div class="sidebar-block">
-        <h2 class="section-head">App Store</h2>
-        <div class="dot-rule"></div>
-        <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#" aria-label="ISSeeYou on App Store">↗</a></span></div>
-        <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
-        <div class="kv-row"><span class="kv-key">Oh Shift!</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
-      </div>
-
+    <div class="sidebar-block">
+      <h2 class="section-head section-head-sm">Stack</h2>
+      <div class="dot-rule"></div>
+      <div class="kv-row"><span class="kv-key">Language</span><span class="kv-val">Swift</span></div>
+      <div class="kv-row"><span class="kv-key">UI</span><span class="kv-val">SwiftUI</span></div>
+      <div class="kv-row"><span class="kv-key">IDE</span><span class="kv-val">Xcode</span></div>
+      <div class="kv-row"><span class="kv-key">Distribution</span><span class="kv-val">App Store · Direct</span></div>
     </div>
+
+    <div class="sidebar-block">
+      <h2 class="section-head section-head-sm">Source</h2>
+      <div class="dot-rule"></div>
+      <p style="font-family:var(--sans); font-size:0.875rem; color:var(--muted); margin-bottom:4px;">Public repositories and activity.</p>
+      <a href="https://github.com/Bravosierra0" class="github-btn" target="_blank" rel="noopener" aria-label="GitHub profile for Bravosierra0">github.com/Bravosierra0 ↗</a>
+    </div>
+
+    <div class="sidebar-block">
+      <h2 class="section-head section-head-sm">App Store</h2>
+      <div class="dot-rule"></div>
+      <div class="kv-row"><span class="kv-key">ISSeeYou</span><span class="kv-val"><a href="#" aria-label="ISSeeYou on App Store">↗</a></span></div>
+      <div class="kv-row"><span class="kv-key">RakRak</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
+      <div class="kv-row"><span class="kv-key">Oh Shift!</span><span class="kv-val" style="color:var(--muted)">TestFlight</span></div>
+    </div>
+
   </aside>
 
 </div>
 
 <footer class="site-footer">
-  <div class="footer-dot-rule"></div>
   <div class="footer-inner">
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
@@ -719,6 +704,7 @@
       <span class="footer-rev">2026.05.31</span>
     </div>
   </div>
+  <div class="colorbar"></div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>

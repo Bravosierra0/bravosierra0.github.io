@@ -204,7 +204,7 @@
   }
 
   .site-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.01em;
@@ -260,15 +260,7 @@
   /* ── layout ── */
   .col-main {
     padding: 18px 18px 28px;
-  }
-
-  .detail-column {
     max-width: 720px;
-  }
-
-  .detail-narrow {
-    max-width: 640px;
-    margin-inline: auto;
   }
 
   /* ── breadcrumb ── */
@@ -281,7 +273,7 @@
 
   /* ── section heads ── */
   h2.section-head {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
     padding-bottom: 5px;
@@ -294,9 +286,12 @@
 
   h2.section-head + .dot-rule { margin-bottom: 14px; }
 
+  /* secondary heading tier: revision history */
+  h2.section-head.section-head-sm { font-size: 0.8rem; }
+
   /* ── detail hero ── */
   .detail-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--mono);
     letter-spacing: 0.01em;
@@ -333,30 +328,18 @@
   /* ── spec plate ── */
   .spec-plate {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 8px 24px;
-  }
-
-  .spec-cell {
-    padding: 10px 0;
-  }
-
-  /* ── meta band (full-bleed wrapper for spec-plate) ── */
-  .meta-band {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
     background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
   }
 
-  .meta-band-inner {
-    max-width: 980px;
-    margin-inline: auto;
-    padding: 16px 18px;
+  .spec-cell {
+    padding: 10px 14px;
+    border-right: 1px dotted var(--border-d);
   }
+
+  .spec-cell:last-child { border-right: none; }
 
   .spec-key {
     font-size: 0.68rem;
@@ -417,7 +400,7 @@
 
   .readout-val {
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
   }
 
   .instrument-note {
@@ -528,14 +511,6 @@
     background: var(--bg2);
   }
 
-  .footer-dot-rule {
-    height: 6px;
-    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
-    border-bottom: 1px solid var(--border);
-  }
-
   .footer-inner {
     padding: 7px 14px;
     display: flex;
@@ -579,6 +554,9 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
+    .spec-plate { grid-template-columns: 1fr; }
+    .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
+    .spec-cell:last-child { border-bottom: none; }
     .readout-grid { grid-template-columns: 1fr; }
     .readout-row:nth-last-child(-n+2) { border-bottom: 1px dotted var(--border-d); }
     .readout-row:last-child { border-bottom: none; }
@@ -607,80 +585,69 @@
 
 <main class="col-main" id="main">
 
-  <div class="detail-column">
-    <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
+  <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
 
-    <h1 class="detail-title">RakRak <span class="status-testflight">TestFlight</span></h1>
-    <p class="detail-tagline">Relationship date tracker. Keep track of moments that matter.</p>
+  <h1 class="detail-title">RakRak <span class="status-testflight">TestFlight</span></h1>
+  <p class="detail-tagline">Relationship date tracker. Keep track of moments that matter.</p>
+
+  <div class="spec-plate">
+    <div class="spec-cell">
+      <div class="spec-key">Platforms</div>
+      <div class="spec-val">iOS, iPadOS</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Category</div>
+      <div class="spec-val">Personal</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Distribution</div>
+      <div class="spec-val">TestFlight</div>
+    </div>
   </div>
 
-  <aside class="meta-band" aria-label="Specifications">
-    <div class="meta-band-inner">
-      <div class="spec-plate">
-        <div class="spec-cell">
-          <div class="spec-key">Platforms</div>
-          <div class="spec-val">iOS, iPadOS</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Category</div>
-          <div class="spec-val">Personal</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Distribution</div>
-          <div class="spec-val">TestFlight</div>
-        </div>
+  <div class="instrument-panel" aria-hidden="true">
+    <div class="instrument-label">Sample tally</div>
+    <div class="readout-grid">
+      <div class="readout-row">
+        <span class="readout-key">Days together</span>
+        <span class="readout-val">1,842</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Next anniversary</span>
+        <span class="readout-val">in 23 days</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Moments logged</span>
+        <span class="readout-val">96</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Last entry</span>
+        <span class="readout-val">4 days ago</span>
       </div>
     </div>
-  </aside>
-
-  <div class="detail-column">
-    <div class="instrument-panel" aria-hidden="true">
-      <div class="instrument-label">Sample tally</div>
-      <div class="readout-grid">
-        <div class="readout-row">
-          <span class="readout-key">Days together</span>
-          <span class="readout-val">1,842</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Next anniversary</span>
-          <span class="readout-val">in 23 days</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Moments logged</span>
-          <span class="readout-val">96</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Last entry</span>
-          <span class="readout-val">4 days ago</span>
-        </div>
-      </div>
-    </div>
-    <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
-
-    <hr class="sep">
-
-    <div class="detail-narrow">
-      <p class="detail-body">RakRak keeps the dates that actually matter to you in one place — anniversaries, first meetings, small moments worth remembering — and counts down or up so you're never caught off guard.</p>
-      <p class="detail-body">No account, no cloud sync, no ads. Everything stays on your device.</p>
-    </div>
-
-    <hr class="sep">
-
-    <h2 class="section-head">Revision history</h2>
-    <div class="dot-rule"></div>
-    <ul class="revision-list">
-      <li><span class="rev-num">0.4.0</span><span class="rev-note">Home Screen widget added</span></li>
-      <li><span class="rev-num">0.3.0</span><span class="rev-note">iPad layout refined</span></li>
-      <li><span class="rev-num">0.2.0</span><span class="rev-note">Initial TestFlight build</span></li>
-    </ul>
-
-    <a href="#" class="store-btn" aria-label="Join the RakRak TestFlight beta">Join the TestFlight beta →</a>
   </div>
+  <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
+
+  <hr class="sep">
+
+  <p class="detail-body">RakRak keeps the dates that actually matter to you in one place — anniversaries, first meetings, small moments worth remembering — and counts down or up so you're never caught off guard.</p>
+  <p class="detail-body">No account, no cloud sync, no ads. Everything stays on your device.</p>
+
+  <hr class="sep">
+
+  <h2 class="section-head section-head-sm">Revision history</h2>
+  <div class="dot-rule"></div>
+  <ul class="revision-list">
+    <li><span class="rev-num">0.4.0</span><span class="rev-note">Home Screen widget added</span></li>
+    <li><span class="rev-num">0.3.0</span><span class="rev-note">iPad layout refined</span></li>
+    <li><span class="rev-num">0.2.0</span><span class="rev-note">Initial TestFlight build</span></li>
+  </ul>
+
+  <a href="#" class="store-btn" aria-label="Join the RakRak TestFlight beta">Join the TestFlight beta →</a>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-dot-rule"></div>
   <div class="footer-inner">
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
@@ -688,6 +655,7 @@
       <span class="footer-rev">2026.05.31</span>
     </div>
   </div>
+  <div class="colorbar"></div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>

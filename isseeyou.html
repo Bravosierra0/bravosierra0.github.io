@@ -204,7 +204,7 @@
   }
 
   .site-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.01em;
@@ -260,15 +260,7 @@
   /* ── layout ── */
   .col-main {
     padding: 18px 18px 28px;
-  }
-
-  .detail-column {
     max-width: 720px;
-  }
-
-  .detail-narrow {
-    max-width: 640px;
-    margin-inline: auto;
   }
 
   /* ── breadcrumb ── */
@@ -281,7 +273,7 @@
 
   /* ── section heads ── */
   h2.section-head {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
     padding-bottom: 5px;
@@ -294,9 +286,12 @@
 
   h2.section-head + .dot-rule { margin-bottom: 14px; }
 
+  /* secondary heading tier: revision history */
+  h2.section-head.section-head-sm { font-size: 0.8rem; }
+
   /* ── detail hero ── */
   .detail-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--mono);
     letter-spacing: 0.01em;
@@ -333,30 +328,18 @@
   /* ── spec plate ── */
   .spec-plate {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 8px 24px;
-  }
-
-  .spec-cell {
-    padding: 10px 0;
-  }
-
-  /* ── meta band (full-bleed wrapper for spec-plate) ── */
-  .meta-band {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
     background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
   }
 
-  .meta-band-inner {
-    max-width: 980px;
-    margin-inline: auto;
-    padding: 16px 18px;
+  .spec-cell {
+    padding: 10px 14px;
+    border-right: 1px dotted var(--border-d);
   }
+
+  .spec-cell:last-child { border-right: none; }
 
   .spec-key {
     font-size: 0.68rem;
@@ -423,7 +406,7 @@
 
   .readout-val {
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
   }
 
   .instrument-note {
@@ -534,14 +517,6 @@
     background: var(--bg2);
   }
 
-  .footer-dot-rule {
-    height: 6px;
-    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
-    border-bottom: 1px solid var(--border);
-  }
-
   .footer-inner {
     padding: 7px 14px;
     display: flex;
@@ -585,6 +560,9 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
+    .spec-plate { grid-template-columns: 1fr; }
+    .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
+    .spec-cell:last-child { border-bottom: none; }
     .readout-grid { grid-template-columns: 1fr; }
     .footer-left { font-size: 0.7rem; }
   }
@@ -611,80 +589,69 @@
 
 <main class="col-main" id="main">
 
-  <div class="detail-column">
-    <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
+  <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
 
-    <h1 class="detail-title">ISSeeYou <span class="status-live">Live</span></h1>
-    <p class="detail-tagline">Real-time ISS tracker. Know when and where to look up.</p>
+  <h1 class="detail-title">ISSeeYou <span class="status-live">Live</span></h1>
+  <p class="detail-tagline">Real-time ISS tracker. Know when and where to look up.</p>
+
+  <div class="spec-plate">
+    <div class="spec-cell">
+      <div class="spec-key">Platforms</div>
+      <div class="spec-val">macOS, iOS, iPadOS, tvOS</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Category</div>
+      <div class="spec-val">Utility</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-key">Distribution</div>
+      <div class="spec-val">App Store</div>
+    </div>
   </div>
 
-  <aside class="meta-band" aria-label="Specifications">
-    <div class="meta-band-inner">
-      <div class="spec-plate">
-        <div class="spec-cell">
-          <div class="spec-key">Platforms</div>
-          <div class="spec-val">macOS, iOS, iPadOS, tvOS</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Category</div>
-          <div class="spec-val">Utility</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-key">Distribution</div>
-          <div class="spec-val">App Store</div>
-        </div>
+  <div class="instrument-panel" aria-hidden="true">
+    <div class="instrument-label">Sample readout</div>
+    <div class="readout-grid">
+      <div class="readout-row">
+        <span class="readout-key">Altitude</span>
+        <span class="readout-val">408 km</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Next pass</span>
+        <span class="readout-val">00:04:12</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Velocity</span>
+        <span class="readout-val">7.66 km/s</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Elevation</span>
+        <span class="readout-val">62°</span>
       </div>
     </div>
-  </aside>
-
-  <div class="detail-column">
-    <div class="instrument-panel" aria-hidden="true">
-      <div class="instrument-label">Sample readout</div>
-      <div class="readout-grid">
-        <div class="readout-row">
-          <span class="readout-key">Altitude</span>
-          <span class="readout-val">408 km</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Next pass</span>
-          <span class="readout-val">00:04:12</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Velocity</span>
-          <span class="readout-val">7.66 km/s</span>
-        </div>
-        <div class="readout-row">
-          <span class="readout-key">Elevation</span>
-          <span class="readout-val">62°</span>
-        </div>
-      </div>
-    </div>
-    <p class="instrument-note">Illustrative figures — not a live feed of this page. The app itself pulls current ISS position and pass predictions on device.</p>
-
-    <hr class="sep">
-
-    <div class="detail-narrow">
-      <p class="detail-body">ISSeeYou tells you when the International Space Station is overhead and worth stepping outside for. It tracks the station's current position and works out your next visible pass, so you get a heads-up instead of having to check a website.</p>
-      <p class="detail-body">No account, no cloud sync, no ads. It runs the same whether you're on your Mac, phone, tablet, or TV.</p>
-    </div>
-
-    <hr class="sep">
-
-    <h2 class="section-head">Revision history</h2>
-    <div class="dot-rule"></div>
-    <ul class="revision-list">
-      <li><span class="rev-num">1.2.0</span><span class="rev-note">Added tvOS pass predictions</span></li>
-      <li><span class="rev-num">1.1.0</span><span class="rev-note">iPad multitasking support</span></li>
-      <li><span class="rev-num">1.0.0</span><span class="rev-note">Initial release</span></li>
-    </ul>
-
-    <a href="#" class="store-btn" aria-label="ISSeeYou on the App Store">View on the App Store →</a>
   </div>
+  <p class="instrument-note">Illustrative figures — not a live feed of this page. The app itself pulls current ISS position and pass predictions on device.</p>
+
+  <hr class="sep">
+
+  <p class="detail-body">ISSeeYou tells you when the International Space Station is overhead and worth stepping outside for. It tracks the station's current position and works out your next visible pass, so you get a heads-up instead of having to check a website.</p>
+  <p class="detail-body">No account, no cloud sync, no ads. It runs the same whether you're on your Mac, phone, tablet, or TV.</p>
+
+  <hr class="sep">
+
+  <h2 class="section-head section-head-sm">Revision history</h2>
+  <div class="dot-rule"></div>
+  <ul class="revision-list">
+    <li><span class="rev-num">1.2.0</span><span class="rev-note">Added tvOS pass predictions</span></li>
+    <li><span class="rev-num">1.1.0</span><span class="rev-note">iPad multitasking support</span></li>
+    <li><span class="rev-num">1.0.0</span><span class="rev-note">Initial release</span></li>
+  </ul>
+
+  <a href="#" class="store-btn" aria-label="ISSeeYou on the App Store">View on the App Store →</a>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-dot-rule"></div>
   <div class="footer-inner">
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
@@ -692,6 +659,7 @@
       <span class="footer-rev">2026.05.31</span>
     </div>
   </div>
+  <div class="colorbar"></div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>

@@ -260,7 +260,15 @@
   /* ── layout ── */
   .col-main {
     padding: 18px 18px 28px;
+  }
+
+  .detail-column {
     max-width: 720px;
+  }
+
+  .detail-narrow {
+    max-width: 640px;
+    margin-inline: auto;
   }
 
   /* ── breadcrumb ── */
@@ -325,18 +333,30 @@
   /* ── spec plate ── */
   .spec-plate {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px 24px;
   }
 
   .spec-cell {
-    padding: 10px 14px;
-    border-right: 1px dotted var(--border-d);
+    padding: 10px 0;
   }
 
-  .spec-cell:last-child { border-right: none; }
+  /* ── meta band (full-bleed wrapper for spec-plate) ── */
+  .meta-band {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .meta-band-inner {
+    max-width: 980px;
+    margin-inline: auto;
+    padding: 16px 18px;
+  }
 
   .spec-key {
     font-size: 0.68rem;
@@ -397,7 +417,7 @@
 
   .readout-val {
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.3rem;
   }
 
   .instrument-note {
@@ -559,9 +579,6 @@
 
   /* ── responsive ── */
   @media (max-width: 640px) {
-    .spec-plate { grid-template-columns: 1fr; }
-    .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
-    .spec-cell:last-child { border-bottom: none; }
     .readout-grid { grid-template-columns: 1fr; }
     .readout-row:nth-last-child(-n+2) { border-bottom: 1px dotted var(--border-d); }
     .readout-row:last-child { border-bottom: none; }
@@ -590,65 +607,75 @@
 
 <main class="col-main" id="main">
 
-  <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
+  <div class="detail-column">
+    <p class="breadcrumb"><a href="index.html#apps">← Apps</a></p>
 
-  <h1 class="detail-title">RakRak <span class="status-testflight">TestFlight</span></h1>
-  <p class="detail-tagline">Relationship date tracker. Keep track of moments that matter.</p>
-
-  <div class="spec-plate">
-    <div class="spec-cell">
-      <div class="spec-key">Platforms</div>
-      <div class="spec-val">iOS, iPadOS</div>
-    </div>
-    <div class="spec-cell">
-      <div class="spec-key">Category</div>
-      <div class="spec-val">Personal</div>
-    </div>
-    <div class="spec-cell">
-      <div class="spec-key">Distribution</div>
-      <div class="spec-val">TestFlight</div>
-    </div>
+    <h1 class="detail-title">RakRak <span class="status-testflight">TestFlight</span></h1>
+    <p class="detail-tagline">Relationship date tracker. Keep track of moments that matter.</p>
   </div>
 
-  <div class="instrument-panel" aria-hidden="true">
-    <div class="instrument-label">Sample tally</div>
-    <div class="readout-grid">
-      <div class="readout-row">
-        <span class="readout-key">Days together</span>
-        <span class="readout-val">1,842</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Next anniversary</span>
-        <span class="readout-val">in 23 days</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Moments logged</span>
-        <span class="readout-val">96</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Last entry</span>
-        <span class="readout-val">4 days ago</span>
+  <aside class="meta-band" aria-label="Specifications">
+    <div class="meta-band-inner">
+      <div class="spec-plate">
+        <div class="spec-cell">
+          <div class="spec-key">Platforms</div>
+          <div class="spec-val">iOS, iPadOS</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-key">Category</div>
+          <div class="spec-val">Personal</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-key">Distribution</div>
+          <div class="spec-val">TestFlight</div>
+        </div>
       </div>
     </div>
+  </aside>
+
+  <div class="detail-column">
+    <div class="instrument-panel" aria-hidden="true">
+      <div class="instrument-label">Sample tally</div>
+      <div class="readout-grid">
+        <div class="readout-row">
+          <span class="readout-key">Days together</span>
+          <span class="readout-val">1,842</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-key">Next anniversary</span>
+          <span class="readout-val">in 23 days</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-key">Moments logged</span>
+          <span class="readout-val">96</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-key">Last entry</span>
+          <span class="readout-val">4 days ago</span>
+        </div>
+      </div>
+    </div>
+    <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
+
+    <hr class="sep">
+
+    <div class="detail-narrow">
+      <p class="detail-body">RakRak keeps the dates that actually matter to you in one place — anniversaries, first meetings, small moments worth remembering — and counts down or up so you're never caught off guard.</p>
+      <p class="detail-body">No account, no cloud sync, no ads. Everything stays on your device.</p>
+    </div>
+
+    <hr class="sep">
+
+    <h2 class="section-head">Revision history</h2>
+    <div class="dot-rule"></div>
+    <ul class="revision-list">
+      <li><span class="rev-num">0.4.0</span><span class="rev-note">Home Screen widget added</span></li>
+      <li><span class="rev-num">0.3.0</span><span class="rev-note">iPad layout refined</span></li>
+      <li><span class="rev-num">0.2.0</span><span class="rev-note">Initial TestFlight build</span></li>
+    </ul>
+
+    <a href="#" class="store-btn" aria-label="Join the RakRak TestFlight beta">Join the TestFlight beta →</a>
   </div>
-  <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
-
-  <hr class="sep">
-
-  <p class="detail-body">RakRak keeps the dates that actually matter to you in one place — anniversaries, first meetings, small moments worth remembering — and counts down or up so you're never caught off guard.</p>
-  <p class="detail-body">No account, no cloud sync, no ads. Everything stays on your device.</p>
-
-  <hr class="sep">
-
-  <h2 class="section-head">Revision history</h2>
-  <div class="dot-rule"></div>
-  <ul class="revision-list">
-    <li><span class="rev-num">0.4.0</span><span class="rev-note">Home Screen widget added</span></li>
-    <li><span class="rev-num">0.3.0</span><span class="rev-note">iPad layout refined</span></li>
-    <li><span class="rev-num">0.2.0</span><span class="rev-note">Initial TestFlight build</span></li>
-  </ul>
-
-  <a href="#" class="store-btn" aria-label="Join the RakRak TestFlight beta">Join the TestFlight beta →</a>
 
 </main>
 

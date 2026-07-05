@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch(e) {}
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e6e2">
+<meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#252525">
+<title>Blank — b347.dev</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<style>
+  @font-face {
+    font-family: 'IBMPlexMono';
+    src: url('../Fonts/IBMPlexMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexMono';
+    src: url('../Fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg:       #f0eeea;
+    --bg2:      #e8e6e2;
+    --bg3:      #dddbd7;
+    --border:   #b8b5b0;
+    --text:     #1a1a1a;
+    --muted:    #6b6762;
+    --accent:   #00695c;
+    --dot-color:#b0ada8;
+    --mono:     'IBMPlexMono', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --bg:       #1c1c1c;
+      --bg2:      #252525;
+      --bg3:      #2e2e2e;
+      --border:   #3a3a3a;
+      --text:     #d8d4cc;
+      --muted:    #7a7670;
+      --accent:   #80cbc4;
+      --dot-color:#3a3836;
+    }
+  }
+
+  [data-theme="dark"] {
+    --bg:       #1c1c1c;
+    --bg2:      #252525;
+    --bg3:      #2e2e2e;
+    --border:   #3a3a3a;
+    --text:     #d8d4cc;
+    --muted:    #7a7670;
+    --accent:   #80cbc4;
+    --dot-color:#3a3836;
+  }
+
+  [data-theme="light"] {
+    --bg:       #f0eeea;
+    --bg2:      #e8e6e2;
+    --bg3:      #dddbd7;
+    --border:   #b8b5b0;
+    --text:     #1a1a1a;
+    --muted:    #6b6762;
+    --accent:   #00695c;
+    --dot-color:#b0ada8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scrollbar-gutter: stable; }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 100;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    max-width: 980px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  .colorbar {
+    height: 6px;
+    background: linear-gradient(to right,
+      #e85454 0% 8%, #e88a3a 8% 16%, #e8b84b 16% 24%,
+      #8bc34a 24% 32%, #4caf8a 32% 40%, #4a9ee8 40% 48%,
+      #7c6ce8 48% 56%, #c84ae8 56% 64%, #e84a8a 64% 72%,
+      #888 72% 80%, #555 80% 88%, #333 88% 100%
+    );
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+    gap: 1rem;
+  }
+
+  .site-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .site-title span { color: var(--accent); }
+
+  .theme-toggle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #1c1c1c 50%, #f0eeea 50%);
+    border: 1.5px solid var(--border);
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.1s;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .site-nav {
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    background: var(--bg2);
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    color: var(--text);
+    border-right: 1px solid var(--border);
+    text-decoration: none;
+    font-family: var(--mono);
+  }
+
+  .site-nav a:hover { background: var(--bg3); color: var(--accent); }
+
+  .page-body {
+    flex: 1;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .blank-remark {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+  }
+
+  .blank-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .site-footer {
+    border-top: 2px solid var(--border);
+    background: var(--bg2);
+  }
+
+  .footer-inner {
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer-code {
+    font-size: 0.72rem;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    letter-spacing: 0.08em;
+    background: var(--bg3);
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="colorbar"></div>
+
+<header class="site-header">
+  <div class="site-title"><a href="../index.html" style="color:inherit;text-decoration:none;">b<span>347</span>.dev</a></div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
+</header>
+
+<nav class="site-nav">
+  <a href="../index.html">Overview</a>
+  <a href="../index.html#apps">Apps</a>
+  <a href="https://github.com/Bravosierra0" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+
+<main class="page-body" id="main">
+  <p class="blank-remark">This page intentionally left blank.</p>
+  <p class="blank-note">(Except for this sentence.)</p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
+    <span class="footer-code">BLANK</span>
+  </div>
+  <div class="colorbar"></div>
+</footer>
+
+<script>
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    var html = document.documentElement;
+    function currentTheme() {
+      var stored = html.getAttribute('data-theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function updateBtn(theme) {
+      var next = theme === 'dark' ? 'light' : 'dark';
+      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    }
+    updateBtn(currentTheme());
+    btn.addEventListener('click', function() {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch(e) {}
+      updateBtn(next);
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      try { if (!localStorage.getItem('theme')) updateBtn(e.matches ? 'dark' : 'light'); } catch(e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>

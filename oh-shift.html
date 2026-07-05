@@ -484,6 +484,42 @@
     text-decoration: none;
   }
 
+  /* ── TestFlight state slot ── */
+  .tf-slot { display: inline-block; margin-top: 22px; }
+
+  .tf-slot .store-btn { margin-top: 0; display: block; }
+
+  .tf-slot::before {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .tf-slot[data-tf-state="open"]::before {
+    content: "● Open for testers";
+    color: var(--accent);
+  }
+
+  .tf-slot[data-tf-state="closed"]::before {
+    content: "● Beta closed";
+    color: var(--muted);
+  }
+
+  .tf-slot[data-tf-state="closed"] .store-btn {
+    border-color: var(--border);
+    color: var(--muted);
+    cursor: not-allowed;
+  }
+
+  .tf-slot[data-tf-state="closed"] .store-btn:hover {
+    background: transparent;
+    color: var(--muted);
+  }
+
   /* ── back to top ── */
   .back-to-top {
     position: fixed;
@@ -646,7 +682,9 @@
     <li><span class="rev-num">0.1.0</span><span class="rev-note">Initial TestFlight build</span></li>
   </ul>
 
-  <a href="#" class="store-btn" aria-label="Join the Oh Shift! TestFlight beta">Join the TestFlight beta →</a>
+  <div class="tf-slot" data-tf-state="closed">
+    <a href="#" class="store-btn" aria-label="Join the Oh Shift! TestFlight beta">Join the TestFlight beta →</a>
+  </div>
 
 </main>
 
@@ -708,6 +746,19 @@
 
     btn.addEventListener('click', function() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<script>
+  (function() {
+    document.querySelectorAll('.tf-slot').forEach(function(slot) {
+      var link = slot.querySelector('.store-btn');
+      if (!link || slot.dataset.tfState === 'open') return;
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('aria-label', 'TestFlight beta is currently closed');
+      link.setAttribute('tabindex', '-1');
     });
   })();
 </script>

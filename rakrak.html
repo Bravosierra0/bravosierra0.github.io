@@ -376,31 +376,19 @@
     font-size: 0.65em;
   }
 
-  .readout-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 24px;
-  }
-
-  .readout-row {
+  .screenshot-strip {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 7px 0;
-    border-bottom: 1px dotted var(--border-d);
-    font-variant-numeric: tabular-nums;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
   }
 
-  .readout-row:nth-last-child(-n+2) { border-bottom: none; }
-
-  .readout-key {
-    color: var(--muted);
-    font-size: 0.8rem;
-  }
-
-  .readout-val {
-    font-weight: 700;
-    font-size: 0.95rem;
+  .screenshot-strip img {
+    height: 380px;
+    width: auto;
+    flex: 0 0 auto;
+    border: 1px solid var(--border-d);
+    scroll-snap-align: start;
   }
 
   .instrument-note {
@@ -600,9 +588,6 @@
     .spec-plate { grid-template-columns: 1fr; }
     .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
     .spec-cell:last-child { border-bottom: none; }
-    .readout-grid { grid-template-columns: 1fr; }
-    .readout-row:nth-last-child(-n+2) { border-bottom: 1px dotted var(--border-d); }
-    .readout-row:last-child { border-bottom: none; }
     .footer-left { font-size: 0.7rem; }
   }
 </style>
@@ -648,28 +633,18 @@
     </div>
   </div>
 
-  <div class="instrument-panel" aria-hidden="true">
-    <div class="instrument-label">Sample tally</div>
-    <div class="readout-grid">
-      <div class="readout-row">
-        <span class="readout-key">Days together</span>
-        <span class="readout-val">1,842</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Next anniversary</span>
-        <span class="readout-val">in 23 days</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Moments logged</span>
-        <span class="readout-val">96</span>
-      </div>
-      <div class="readout-row">
-        <span class="readout-key">Last entry</span>
-        <span class="readout-val">4 days ago</span>
-      </div>
+  <div class="instrument-panel">
+    <div class="instrument-label">Screens</div>
+    <div class="screenshot-strip">
+      <img src="Images/RakRak/rakrak-home.png" width="400" height="867" loading="lazy" decoding="async"
+           alt="RakRak home screen listing occasions by category, each with a day countdown">
+      <img src="Images/RakRak/rakrak-detail.png" width="400" height="867" loading="lazy" decoding="async"
+           alt="RakRak occasion detail screen showing days to go, days since, and a time breakdown">
+      <img src="Images/RakRak/rakrak-settings.png" width="400" height="867" loading="lazy" decoding="async"
+           alt="RakRak settings screen showing appearance themes, language, and notification options">
     </div>
   </div>
-  <p class="instrument-note">Illustrative figures — your own dates and entries populate this on device.</p>
+  <p class="instrument-note">Screens from the current TestFlight build.</p>
 
   <hr class="sep">
 

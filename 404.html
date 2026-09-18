@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  (function() {
-    try {
-      var t = localStorage.getItem('theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
-    } catch(e) {}
-  })();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
@@ -49,7 +41,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
+    :root {
       --bg:       #1c1c1c;
       --bg2:      #252525;
       --bg3:      #2e2e2e;
@@ -59,28 +51,6 @@
       --accent:   #80cbc4;
       --dot-color:#3a3836;
     }
-  }
-
-  [data-theme="dark"] {
-    --bg:       #1c1c1c;
-    --bg2:      #252525;
-    --bg3:      #2e2e2e;
-    --border:   #3a3a3a;
-    --text:     #d8d4cc;
-    --muted:    #7a7670;
-    --accent:   #80cbc4;
-    --dot-color:#3a3836;
-  }
-
-  [data-theme="light"] {
-    --bg:       #f0eeea;
-    --bg2:      #e8e6e2;
-    --bg3:      #dddbd7;
-    --border:   #b8b5b0;
-    --text:     #1a1a1a;
-    --muted:    #6b6762;
-    --accent:   #00695c;
-    --dot-color:#b0ada8;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -163,22 +133,6 @@
   }
 
   .site-title span { color: var(--accent); }
-
-  .theme-toggle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: linear-gradient(to right, #1c1c1c 50%, #f0eeea 50%);
-    border: 1.5px solid var(--border);
-    padding: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: border-color 0.1s;
-  }
-
-  .theme-toggle:hover {
-    border-color: var(--accent);
-  }
 
   .site-nav {
     border-bottom: 2px solid var(--border);
@@ -291,7 +245,6 @@
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode"></button>
 </header>
 
 <nav class="site-nav">
@@ -314,32 +267,6 @@
     <span class="footer-code">404</span>
   </div>
 </footer>
-
-<script>
-  (function() {
-    var btn = document.getElementById('theme-toggle');
-    var html = document.documentElement;
-    function currentTheme() {
-      var stored = html.getAttribute('data-theme');
-      if (stored) return stored;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    function updateBtn(theme) {
-      var next = theme === 'dark' ? 'light' : 'dark';
-      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
-    }
-    updateBtn(currentTheme());
-    btn.addEventListener('click', function() {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch(e) {}
-      updateBtn(next);
-    });
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      try { if (!localStorage.getItem('theme')) updateBtn(e.matches ? 'dark' : 'light'); } catch(e) {}
-    });
-  })();
-</script>
 
 </body>
 </html>

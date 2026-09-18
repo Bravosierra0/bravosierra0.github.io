@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- flash prevention: read stored theme before paint -->
-<script>
-  (function() {
-    try {
-      var t = localStorage.getItem('theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
-    } catch(e) {}
-  })();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
@@ -79,9 +70,9 @@
     --sans:      'IBMPlexSans', sans-serif;
   }
 
-  /* ── DARK MODE via OS (only when no user override is set) ── */
+  /* ── DARK MODE via OS ── */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
+    :root {
       --bg:        #1c1c1c;
       --bg2:       #252525;
       --bg3:       #2e2e2e;
@@ -96,38 +87,6 @@
       --tf-fg:     #0a1e33;
       --dot-color: #3a3836;
     }
-  }
-
-  /* ── DARK MODE via user toggle ── */
-  [data-theme="dark"] {
-    --bg:        #1c1c1c;
-    --bg2:       #252525;
-    --bg3:       #2e2e2e;
-    --border:    #3a3a3a;
-    --border-d:  #303030;
-    --text:      #d8d4cc;
-    --muted:     #7a7670;
-    --accent:    #80cbc4;
-    --green-bg:  #5a9e6f;
-    --green-fg:  #0d2214;
-    --tf-bg:     #4da3ff;
-    --tf-fg:     #0a1e33;
-    --dot-color: #3a3836;
-  }
-
-  /* ── LIGHT MODE via user toggle (override OS dark) ── */
-  [data-theme="light"] {
-    --bg:        #f0eeea;
-    --bg2:       #e8e6e2;
-    --bg3:       #dddbd7;
-    --border:    #b8b5b0;
-    --border-d:  #ccc9c4;
-    --text:      #1a1a1a;
-    --muted:     #6b6762;
-    --accent:    #00695c;
-    --green-bg:  #2a6e3a;
-    --green-fg:  #e8f5eb;
-    --dot-color: #b0ada8;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -225,12 +184,6 @@
   }
 
   .site-title span { color: var(--accent); }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
 
   /* ── nav ── */
   .site-nav {
@@ -584,8 +537,6 @@
 
 <header class="site-header">
   <div class="site-title">b<span>347</span>.dev</div>
-  <div class="header-right">
-  </div>
 </header>
 
 <nav class="site-nav" aria-label="Primary">
@@ -697,46 +648,6 @@
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
-
-<script>
-  (function() {
-    var btn = document.getElementById('theme-toggle');
-    var html = document.documentElement;
-
-    // determine effective current theme
-    function currentTheme() {
-      var stored = html.getAttribute('data-theme');
-      if (stored) return stored;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    // update button label and aria-label to show what you switch TO
-    function updateBtn(theme) {
-      var next = theme === 'dark' ? 'light' : 'dark';
-      btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
-    }
-
-    // init button state
-    updateBtn(currentTheme());
-
-    // toggle on click
-    btn.addEventListener('click', function() {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch(e) {}
-      updateBtn(next);
-    });
-
-    // respond to OS change only when no user override stored
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      try {
-        if (!localStorage.getItem('theme')) {
-          updateBtn(e.matches ? 'dark' : 'light');
-        }
-      } catch(e) {}
-    });
-  })();
-</script>
 
 <script>
   (function() {

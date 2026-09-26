@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8e6e2">
+<meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#252525">
+<title>Rak Rak Privacy Policy — b347.dev</title>
+<meta name="description" content="Privacy policy for Rak Rak, the relationship date tracker for iPhone and iPad.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://b347.dev/rakrak/privacy">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../Fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: 'IBMPlexMono';
+    src: url('../Fonts/IBMPlexMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexMono';
+    src: url('../Fonts/IBMPlexMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexMono';
+    src: url('../Fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBMPlexSans';
+    src: url('../Fonts/IBMPlexSans-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* ── LIGHT MODE (default) ── */
+  :root {
+    --bg:        #f0eeea;
+    --bg2:       #e8e6e2;
+    --bg3:       #dddbd7;
+    --border:    #b8b5b0;
+    --border-d:  #ccc9c4;
+    --text:      #1a1a1a;
+    --muted:     #5d5955;
+    --accent:    #00695c;
+    --dot-color: #b0ada8;
+    --mono:      'IBMPlexMono', monospace;
+    --sans:      'IBMPlexSans', sans-serif;
+  }
+
+  /* ── DARK MODE via OS ── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #1c1c1c;
+      --bg2:       #252525;
+      --bg3:       #2e2e2e;
+      --border:    #3a3a3a;
+      --border-d:  #303030;
+      --text:      #d8d4cc;
+      --muted:     #a19d96;
+      --accent:    #80cbc4;
+      --dot-color: #3a3836;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-weight: 500;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss06", "ss08"; /* IBM Plex Mono Alt glyphs for # and l */
+    max-width: 980px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── skip link ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 100;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* ── focus indicators ── */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ── reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── colorbar ── */
+  .colorbar {
+    height: 6px;
+    background: linear-gradient(to right,
+      #e85454 0% 8%, #e88a3a 8% 16%, #e8b84b 16% 24%,
+      #8bc34a 24% 32%, #4caf8a 32% 40%, #4a9ee8 40% 48%,
+      #7c6ce8 48% 56%, #c84ae8 56% 64%, #e84a8a 64% 72%,
+      #888 72% 80%, #555 80% 88%, #333 88% 100%
+    );
+  }
+
+  /* ── dot-rule ── */
+  .dot-rule {
+    height: 8px;
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-repeat: repeat;
+  }
+
+  /* ── header ── */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+    gap: 1rem;
+  }
+
+  .site-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.01em;
+    font-family: var(--mono);
+  }
+
+  .site-title span { color: var(--accent); }
+
+  /* ── nav ── */
+  .site-nav {
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    background: var(--bg2);
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    border-right: 1px solid var(--border);
+    text-decoration: none;
+    font-family: var(--mono);
+  }
+
+  .site-nav a:hover { background: var(--bg3); color: var(--accent); }
+  .site-nav a.active { color: var(--accent); font-weight: 700; }
+
+  /* ── layout ── */
+  .col-main {
+    flex: 1;
+    padding: 18px 18px 28px;
+    max-width: 720px;
+  }
+
+  /* ── breadcrumb ── */
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-family: var(--mono);
+  }
+
+  /* ── title ── */
+  .detail-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--mono);
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
+  }
+
+  .detail-tagline {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-family: var(--mono);
+  }
+
+  /* ── section heads ── */
+  h2.section-head {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+    padding-bottom: 5px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--mono);
+    line-height: 1.55;
+  }
+
+  h2.section-head + .dot-rule { margin-bottom: 12px; }
+
+  /* ── body copy ── */
+  .detail-body {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .detail-body strong { color: var(--text); }
+
+  /* ── footer ── */
+  .site-footer {
+    border-top: 2px solid var(--border);
+    background: var(--bg2);
+  }
+
+  .footer-inner {
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer-inner:hover {
+    background: var(--bg3);
+    text-decoration: none;
+  }
+
+  .footer-left {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    letter-spacing: 0.06em;
+    background: var(--bg3);
+    font-family: var(--mono);
+  }
+
+  .footer-rev {
+    font-size: 0.72rem;
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+  }
+
+  /* ── responsive ── */
+  @media (max-width: 640px) {
+    .footer-left { font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="colorbar"></div>
+
+<header class="site-header">
+  <div class="site-title"><a href="../index.html" style="color:inherit;text-decoration:none;">b<span>347</span>.dev</a></div>
+</header>
+
+<nav class="site-nav" aria-label="Primary">
+  <a href="../index.html">Overview</a>
+  <a href="../index.html#apps" class="active">Apps</a>
+  <a href="https://github.com/Bravosierra0" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+
+<main class="col-main" id="main">
+
+  <p class="breadcrumb"><a href="../rakrak.html">← Rak Rak</a></p>
+
+  <h1 class="detail-title">Privacy Policy</h1>
+  <p class="detail-tagline">Rak Rak for iPhone and iPad. Last updated: 2026-09-26.</p>
+
+  <h2 class="section-head">Your data</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body">Rak Rak stores the occasions you add: each date, its category, and any note or photo you attach. Rak Rak saves this data on your device.</p>
+
+  <h2 class="section-head">iCloud sync</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body">If you sign in to iCloud, Rak Rak syncs this data through your own iCloud account, using Apple's CloudKit. It does not pass through any Rak Rak server, because there is none.</p>
+
+  <h2 class="section-head">No account, no tracking</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body">Rak Rak has no account and no login. It uses no third-party analytics, advertising, or tracking SDK.</p>
+
+  <h2 class="section-head">Permissions</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body">Rak Rak asks for one permission: Notifications, when you tap Enable Notifications.</p>
+  <p class="detail-body">To attach a photo, you pick it in the system photo picker. Rak Rak only receives that photo.</p>
+
+  <h2 class="section-head">Deleting your data</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body">To remove an occasion, delete it in the app. If iCloud sync is on, this also removes it from your iCloud account.</p>
+  <p class="detail-body">Deleting the app removes the data from your device only. If iCloud sync is on, the copy in iCloud stays. To remove it, delete your occasions and categories in the app, then delete the app.</p>
+
+  <h2 class="section-head">Contact</h2>
+  <div class="dot-rule"></div>
+  <p class="detail-body"><a href="mailto:sibe1024@gmx.net">sibe1024@gmx.net</a></p>
+  <p class="detail-body">See also: <a href="support.html">Rak Rak Support</a></p>
+
+</main>
+
+<footer class="site-footer">
+  <a class="footer-inner" href="../blank/" aria-label="b347.dev">
+    <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
+    <div class="footer-right">
+      <span class="footer-tag">REV</span>
+      <span class="footer-rev">2026.09.26</span>
+    </div>
+  </a>
+  <div class="colorbar"></div>
+</footer>
+
+</body>
+</html>

@@ -13,6 +13,16 @@ b347.dev
 - `site.css` loads the fonts with paths relative to itself. Pages in subfolders link it as `../site.css`.
 - `404.html` and `blank/index.html` keep their own inline CSS. GitHub Pages serves `404.html` at any missing path, so a relative stylesheet link would break there.
 
+## Add an app
+
+1. Create `<app>.html` at the root. Copy `almanora.html`, which links `site.css` and `app.css`.
+2. Create the folder `<app>/` with `privacy.html` and `support.html`. Copy them from `almanora/`. They link `../site.css` and `../legal.css`.
+3. Point the breadcrumb on both pages to `../<app>.html`.
+4. Add the `detail-links` line on the app page. It links `<app>/support.html` and `<app>/privacy.html`.
+5. Add a row to the app table and to the App Store block in `index.html`.
+
+The App Store Connect URLs are `https://b347.dev/<app>/privacy.html` and `https://b347.dev/<app>/support.html`.
+
 ## Maintenance
 
 ### TestFlight beta status

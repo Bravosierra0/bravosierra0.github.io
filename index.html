@@ -14,199 +14,8 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="Fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
 <style>
-  @font-face {
-    font-family: 'IBMPlexMono';
-    src: url('Fonts/IBMPlexMono-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'IBMPlexMono';
-    src: url('Fonts/IBMPlexMono-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'IBMPlexMono';
-    src: url('Fonts/IBMPlexMono-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'IBMPlexSans';
-    src: url('Fonts/IBMPlexSans-Variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'IBMPlexSans';
-    src: url('Fonts/IBMPlexSans-MediumItalic.woff2') format('woff2');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-  }
-
-  /* ── LIGHT MODE (default) ── */
-  :root {
-    --bg:        #f0eeea;
-    --bg2:       #e8e6e2;
-    --bg3:       #dddbd7;
-    --border:    #b8b5b0;
-    --border-d:  #ccc9c4;
-    --text:      #1a1a1a;
-    --muted:     #5d5955;
-    --accent:    #00695c;
-    --green-bg:  #2a6e3a;
-    --green-fg:  #e8f5eb;
-    --tf-bg:     #0a67c6;
-    --tf-fg:     #eaf4ff;
-    --dot-color: #b0ada8;
-    --mono:      'IBMPlexMono', monospace;
-    --sans:      'IBMPlexSans', sans-serif;
-  }
-
-  /* ── DARK MODE via OS ── */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg:        #1c1c1c;
-      --bg2:       #252525;
-      --bg3:       #2e2e2e;
-      --border:    #3a3a3a;
-      --border-d:  #303030;
-      --text:      #d8d4cc;
-      --muted:     #a19d96;
-      --accent:    #80cbc4;
-      --green-bg:  #5a9e6f;
-      --green-fg:  #0d2214;
-      --tf-bg:     #4da3ff;
-      --tf-fg:     #0a1e33;
-      --dot-color: #3a3836;
-    }
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html {
-    font-size: 16px;
-    scrollbar-gutter: stable;
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--mono);
-    font-weight: 500;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    font-feature-settings: "ss06", "ss08"; /* IBM Plex Mono Alt glyphs for # and l */
-    max-width: 980px;
-    margin: 0 auto;
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ── skip link ── */
-  .skip-link {
-    position: absolute;
-    top: -100%;
-    left: 0;
-    padding: 6px 12px;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    z-index: 100;
-    text-decoration: none;
-  }
-  .skip-link:focus { top: 0; }
-
-  /* ── focus indicators ── */
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  /* ── reduced motion ── */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  /* ── colorbar ── */
-  .colorbar {
-    height: 6px;
-    background: linear-gradient(to right,
-      #e85454 0% 8%, #e88a3a 8% 16%, #e8b84b 16% 24%,
-      #8bc34a 24% 32%, #4caf8a 32% 40%, #4a9ee8 40% 48%,
-      #7c6ce8 48% 56%, #c84ae8 56% 64%, #e84a8a 64% 72%,
-      #888 72% 80%, #555 80% 88%, #333 88% 100%
-    );
-  }
-
-  /* ── dot-rule ── */
-  .dot-rule {
-    height: 8px;
-    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
-  }
-
-  /* ── header ── */
-  .site-header {
-    border-bottom: 1px solid var(--border);
-    padding: 7px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--bg2);
-    gap: 1rem;
-  }
-
-  .site-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.01em;
-    font-family: var(--mono);
-  }
-
-  .site-title span { color: var(--accent); }
-
-  /* ── nav ── */
-  .site-nav {
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    background: var(--bg2);
-  }
-
-  .site-nav a {
-    display: block;
-    padding: 6px 16px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text);
-    border-right: 1px solid var(--border);
-    text-decoration: none;
-    font-family: var(--mono);
-  }
-
-  .site-nav a:hover { background: var(--bg3); color: var(--accent); }
-  .site-nav a.active { color: var(--accent); font-weight: 700; }
-
   /* ── layout ── */
   .page-body {
     display: grid;
@@ -221,29 +30,6 @@
 
   .col-side {
     padding: 18px 16px 28px;
-  }
-
-  /* ── section heads (now h2) ── */
-  h2.section-head {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text);
-    padding-bottom: 5px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    /* reset h2 defaults */
-    font-family: var(--mono);
-    line-height: 1.55;
-  }
-
-  h2.section-head + .dot-rule {
-    margin-bottom: 14px;
-  }
-
-  /* secondary heading tier: sidebar panels */
-  h2.section-head.section-head-sm {
-    font-size: 0.8rem;
   }
 
   /* ── lead ── */
@@ -272,13 +58,6 @@
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.7;
-  }
-
-  /* ── separator ── */
-  .sep {
-    border: none;
-    border-top: 1px dotted var(--border);
-    margin: 18px 0;
   }
 
   /* ── app table ── */
@@ -330,51 +109,6 @@
   .app-table th:nth-child(3),
   .app-table td:nth-child(3) { padding-right: 10px; }
 
-  .status-live {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--green-bg);
-    color: var(--green-fg);
-    padding: 1px 9px;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    font-family: var(--mono);
-  }
-
-  .status-live::before { content: '●'; font-size: 0.7em; }
-
-  .status-wip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--bg3);
-    color: var(--muted);
-    padding: 1px 9px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    letter-spacing: 0.05em;
-    font-family: var(--mono);
-  }
-
-  .status-wip::before { content: '○'; font-size: 0.7em; }
-
-  .status-testflight {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--tf-bg);
-    color: var(--tf-fg);
-    padding: 1px 9px;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    font-family: var(--mono);
-  }
-  
-  .status-testflight::before { content: '◐'; font-size: 0.7em; }
-  
   /* ── philosophy ── */
   .philosophy {
     border: 1px solid var(--border);
@@ -413,101 +147,12 @@
   .kv-key { color: var(--muted); flex-shrink: 0; }
   .kv-val { color: var(--text); text-align: right; }
 
-  /* ── back to top ── */
-  .back-to-top {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--accent);
-    background: var(--bg2);
-    color: var(--accent);
-    font-family: var(--mono);
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(6px);
-    transition: opacity 0.15s, transform 0.15s, background 0.1s, color 0.1s;
-    z-index: 10;
-  }
-
-  .back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .back-to-top:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  /* ── footer ── */
-  .site-footer {
-    border-top: 2px solid var(--border);
-    background: var(--bg2);
-  }
-
-  .footer-inner {
-    padding: 7px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .footer-inner:hover {
-    background: var(--bg3);
-    text-decoration: none;
-  }
-
-  .footer-left {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-family: var(--mono);
-  }
-
-  .footer-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .footer-tag {
-    font-size: 0.72rem;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 2px 7px;
-    letter-spacing: 0.06em;
-    background: var(--bg3);
-    font-family: var(--mono);
-  }
-
-  .footer-rev {
-    font-size: 0.72rem;
-    border: 1px solid var(--border);
-    padding: 2px 7px;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--mono);
-  }
-
   /* ── responsive ── */
   @media (max-width: 640px) {
     .page-body { grid-template-columns: 1fr; }
     .col-main { border-right: none; border-bottom: 1px solid var(--border); }
     .app-table th:nth-child(4),
     .app-table td:nth-child(4) { display: none; }
-    .footer-left { font-size: 0.7rem; }
   }
 </style>
 </head>

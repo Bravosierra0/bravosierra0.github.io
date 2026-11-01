@@ -1,0 +1,26 @@
+/* b347.dev: privacy and support pages in each app folder. Loads after site.css. */
+
+/* ── layout ── */
+.col-main {
+  flex: 1;
+  padding: 18px 18px 28px;
+  max-width: 720px;
+}
+
+/* ── section heads ── */
+h2.section-head {
+  font-size: 0.8rem;
+  margin-top: 22px;
+}
+
+h2.section-head + .dot-rule { margin-bottom: 12px; }
+
+/* ── questions ── */
+h3.faq-q {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 16px;
+  margin-bottom: 4px;
+}

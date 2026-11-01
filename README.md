@@ -1,5 +1,18 @@
 b347.dev
 
+## Stylesheets
+
+| File | Loaded by | Content |
+|------|-----------|---------|
+| `site.css` | every page except `404.html` and `blank/` | fonts, colors, header, nav, footer, shared components |
+| `app.css` | app pages such as `rakrak.html` | spec plate, revision list, TestFlight slot, support links |
+| `legal.css` | `<app>/privacy.html`, `<app>/support.html` | layout, section heads, questions |
+
+- Each page links `site.css` first, then its page-type sheet, then its own inline `<style>`. Inline rules win.
+- An app page keeps only its signature element inline, for example the week grid in `oh-shift.html`.
+- `site.css` loads the fonts with paths relative to itself. Pages in subfolders link it as `../site.css`.
+- `404.html` and `blank/index.html` keep their own inline CSS. GitHub Pages serves `404.html` at any missing path, so a relative stylesheet link would break there.
+
 ## Maintenance
 
 ### TestFlight beta status

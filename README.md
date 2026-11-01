@@ -18,8 +18,9 @@ b347.dev
 1. Create `<app>.html` at the root. Copy `almanora.html`, which links `site.css` and `app.css`.
 2. Create the folder `<app>/` with `privacy.html` and `support.html`. Copy them from `almanora/`. They link `../site.css` and `../legal.css`.
 3. Point the breadcrumb on both pages to `../<app>.html`.
-4. Add the `detail-links` line on the app page. It links `<app>/support.html` and `<app>/privacy.html`.
-5. Add a row to the app table and to the App Store block in `index.html`.
+4. Put screenshots in `<app>/images/`. The app page links them as `<app>/images/<file>.png`.
+5. Add the `detail-links` line on the app page. It links `<app>/support.html` and `<app>/privacy.html`.
+6. Add a row to the app table and to the App Store block in `index.html`.
 
 The App Store Connect URLs are `https://b347.dev/<app>/privacy.html` and `https://b347.dev/<app>/support.html`.
 

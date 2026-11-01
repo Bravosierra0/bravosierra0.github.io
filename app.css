@@ -18,6 +18,12 @@
 .status-live,
 .status-testflight { font-size: 0.75rem; }
 
+.app-icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
 /* ── spec plate ── */
 .spec-plate {
   display: grid;

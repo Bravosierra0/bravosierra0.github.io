@@ -19,6 +19,7 @@ b347.dev
 2. Create the folder `<app>/` with `privacy.html` and `support.html`. Copy them from `almanora/`. They link `../site.css` and `../legal.css`.
 3. Point the breadcrumb on both pages to `../<app>.html`.
 4. Put screenshots in `<app>/images/`. The app page links them as `<app>/images/<file>.png`.
+   The app icon goes there as `icon.png`, 256 px. Export it from Icon Composer at 1024 px, then run `sips -Z 256`. The app page shows it at 64 px, the app table in `index.html` at 24 px.
 5. Add the `detail-links` line on the app page. It links `<app>/support.html` and `<app>/privacy.html`.
 6. Add a row to the app table and to the App Store block in `index.html`.
 

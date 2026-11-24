@@ -1,5 +1,5 @@
 /* b347.dev: app pages such as rakrak.html. Loads after site.css. */
-/* Each app page keeps only its signature element inline. */
+/* Signature elements of single apps are at the end, one section per app. */
 
 /* ── layout ── */
 .col-main {
@@ -174,4 +174,112 @@
   .spec-plate { grid-template-columns: 1fr; }
   .spec-cell { border-right: none; border-bottom: 1px dotted var(--border-d); }
   .spec-cell:last-child { border-bottom: none; }
+}
+
+/* ════ signature elements, one section per app ════ */
+
+/* ── ISSeeYou: sample readout (signature element) ── */
+/* live pulse: overrides the TestFlight dot for live apps */
+.instrument-panel.live .instrument-label::before {
+  color: var(--green-bg);
+  animation: instrument-pulse 2s ease-in-out infinite;
+}
+
+@keyframes instrument-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+.readout-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 24px;
+}
+
+.readout-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--border-d);
+  font-variant-numeric: tabular-nums;
+}
+
+.readout-row:nth-last-child(-n+1) { border-bottom: none; }
+
+.readout-key {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.readout-val {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ── responsive ── */
+@media (max-width: 640px) {
+  .readout-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Oh Shift!: week grid (signature element) ── */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.week-cell {
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--mono);
+}
+
+.week-cell .day-label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.week-cell .day-mark {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.week-cell.filled {
+  background: var(--tf-bg);
+  border-color: var(--tf-bg);
+}
+
+.week-cell.filled .day-label,
+.week-cell.filled .day-mark {
+  color: var(--tf-fg);
+}
+
+/* ── responsive ── */
+@media (max-width: 640px) {
+  .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .week-cell .day-label { font-size: 0.55rem; }
+}
+
+/* ── Rak Rak: screenshot strip (signature element) ── */
+.screenshot-strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+
+.screenshot-strip img {
+  height: 380px;
+  width: auto;
+  flex: 0 0 auto;
+  border: 1px solid var(--border-d);
+  scroll-snap-align: start;
 }

@@ -16,22 +16,6 @@
 <link rel="preload" href="Fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="app.css">
-<style>
-  .screenshot-strip {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-  }
-
-  .screenshot-strip img {
-    height: 380px;
-    width: auto;
-    flex: 0 0 auto;
-    border: 1px solid var(--border-d);
-    scroll-snap-align: start;
-  }
-</style>
 </head>
 <body>
 
@@ -111,7 +95,7 @@
     <span class="footer-left">b347.dev — Computer-System-Engineering, Development</span>
     <div class="footer-right">
       <span class="footer-tag">REV</span>
-      <span class="footer-rev">2026.05.31</span>
+      <span class="footer-rev">2026.11.24</span>
     </div>
   </a>
   <div class="colorbar"></div>
@@ -119,32 +103,7 @@
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
-<script>
-  (function() {
-    var btn = document.getElementById('back-to-top');
-
-    window.addEventListener('scroll', function() {
-      btn.classList.toggle('visible', window.scrollY > 400);
-    });
-
-    btn.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  })();
-</script>
-
-<script>
-  (function() {
-    document.querySelectorAll('.tf-slot').forEach(function(slot) {
-      var link = slot.querySelector('.store-btn');
-      if (!link || slot.dataset.tfState === 'open') return;
-      link.removeAttribute('href');
-      link.setAttribute('aria-disabled', 'true');
-      link.setAttribute('aria-label', 'TestFlight beta is currently closed');
-      link.setAttribute('tabindex', '-1');
-    });
-  })();
-</script>
+<script src="site.js"></script>
 
 </body>
 </html>

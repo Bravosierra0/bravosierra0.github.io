@@ -20,13 +20,15 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: #f2f0ec;
-    --text: #161616;
-    --muted: #57534d;
-    --border: #d3cfc9;
+    /* OKSelenized White: bg_0, fg_1, fg_0, bg_1 */
+    --bg: #ffffff;
+    --text: #282828;
+    --muted: #474747;
+    --border: #ebebeb;
     --amber: #8a5000;
     --link: #9a00b5;
-    --bar-bg: #161616;
+    --bar-bg: #282828;
+    --bar-fg: #ebebeb;
   }
 }
 

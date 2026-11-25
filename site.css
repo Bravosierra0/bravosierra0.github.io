@@ -6,14 +6,15 @@
 
 :root {
   color-scheme: dark light;
-  --bg: #141414;
-  --text: #e4e0d8;
-  --muted: #a8a39b;
-  --border: #2e2e2e;
+  /* OKSelenized Black: bg_0, fg_1, fg_0, bg_1 */
+  --bg: #181818;
+  --text: #dedede;
+  --muted: #b9b9b9;
+  --border: #252525;
   --amber: #FC9903;
   --link: #e45cff;
-  --bar-bg: #262626;
-  --bar-fg: #e4e0d8;
+  --bar-bg: #252525;
+  --bar-fg: #dedede;
   --bar-rule: #444444;
 }
 
@@ -79,7 +80,9 @@ p { margin: 0 0 6px; max-width: 72ch; }
 .app-tag { color: var(--muted); font-size: 14px; }
 .app .links .status { min-width: 12ch; }
 .app .links .store { min-width: 15ch; }
-.live { color: var(--amber); }
+.status { display: inline-block; }
+.live { color: var(--text); }
+.live::first-letter { color: var(--amber); }
 .beta { color: var(--muted); }
 
 /* cursor */

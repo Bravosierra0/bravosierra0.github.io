@@ -26,12 +26,12 @@
     --text: #282828;
     --muted: #474747;
     --border: #ebebeb;
-    --amber: #8a5000;
+    --amber: #b75300;      /* OKSelenized White orange */
     --link: #9a00b5;
     --bar-bg: #ebebeb;
     --bar-fg: #282828;
     --bar-rule: #cdcdcd;
-    --bar-amber: #8a5000;
+    --bar-amber: #ae4f00;  /* br_orange: 4.5:1 on bg_1 */
   }
 }
 

@@ -15,6 +15,7 @@
   --link: #e45cff;
   --bar-bg: #252525;
   --bar-fg: #dedede;
+  --bar-amber: #FC9903;
   --bar-rule: #444444;
 }
 
@@ -27,8 +28,10 @@
     --border: #ebebeb;
     --amber: #8a5000;
     --link: #9a00b5;
-    --bar-bg: #282828;
-    --bar-fg: #ebebeb;
+    --bar-bg: #ebebeb;
+    --bar-fg: #282828;
+    --bar-rule: #cdcdcd;
+    --bar-amber: #8a5000;
   }
 }
 
@@ -107,5 +110,5 @@ h2, h3 { margin: 0 0 2px; font-size: 15px; font-weight: 600; color: var(--amber)
 .bar-in { max-width: 960px; margin: 0 auto; padding: 6px 28px; display: flex; flex-wrap: wrap; gap: 6px 0; }
 .bar-in > * { padding: 0 12px; border-right: 1px solid var(--bar-rule); }
 .bar-in > :first-child { padding-left: 0; }
-.bar-in > :last-child { margin-left: auto; padding-right: 0; border-right: 0; color: #FC9903; }
+.bar-in > :last-child { margin-left: auto; padding-right: 0; border-right: 0; color: var(--bar-amber); }
 .bar a { color: var(--bar-fg); }

@@ -62,7 +62,7 @@ a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 .crumb .prompt { color: var(--amber); }
 
 /* shared text */
-.cmd { color: var(--muted); }
+.cmd { color: var(--amber); }
 .muted { color: var(--muted); }
 .amber { color: var(--amber); }
 section { margin-bottom: 28px; }

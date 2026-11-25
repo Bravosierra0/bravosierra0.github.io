@@ -1,22 +1,14 @@
 {
   "name": "b347.dev",
   "short_name": "b347",
-  "description": "Building small, focused apps for all Apple platforms.",
+  "description": "Small, focused apps for Apple platforms. Support and privacy pages.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1c1c1c",
-  "theme_color": "#80cbc4",
+  "background_color": "#141414",
+  "theme_color": "#141414",
   "icons": [
-    {
-      "src": "apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    },
-    {
-      "src": "favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
 }

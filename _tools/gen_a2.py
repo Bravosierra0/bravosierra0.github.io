@@ -59,7 +59,7 @@ def footer():
 
 APPS = [
     dict(slug="isseeyou", name="ISSeeYou", tag="Real-time ISS tracker.", devices="Mac, iPhone, iPad and Apple TV",
-         state="live", store=None),  # D4: App Store URL follows
+         state="dev", store=None),  # in development; D4: App Store URL follows
     dict(slug="rakrak", name="Rak Rak", tag="Relationship date tracker.", devices="iPhone and iPad",
          state="closed", store=None),
     dict(slug="oh-shift", name="Oh Shift!", tag="Roster calendar for shift work.", devices="iPhone and iPad",
@@ -70,6 +70,8 @@ APPS = [
 
 def store_link(a, cls=""):
     c = f' class="{cls}"' if cls else ""
+    if a["state"] == "dev":
+        return f'<span{c}></span>' if cls else ""   # in development: no store link
     if a["state"] in ("live", "open") and not a["store"]:
         return f'<span{c}></span>' if cls else ""   # URL not known yet: no link
     if a["state"] == "live":
@@ -79,15 +81,16 @@ def store_link(a, cls=""):
     return f'<span{c} class="muted">[ beta full ]</span>' if not cls else f'<span class="{cls} muted">[ beta full ]</span>'
 
 # ---------------- home
-def home():
-    rows = []
-    for a in APPS:
-        live = a["state"] == "live"
-        status = '<span class="status live">● live</span>' if live else '<span class="status beta">○ testflight</span>'
-        rows.append(f'''      <div class="app" id="{a["slug"]}">
+def row(a):
+        status = {"live": '<span class="status live">● live</span>',
+                  "dev": '<span class="status beta">○ in dev</span>'}.get(a["state"], '<span class="status beta">○ testflight</span>')
+        return f'''      <div class="app" id="{a["slug"]}">
         <div class="app-id"><img src="/{a["slug"]}/images/icon.png" alt=""><span><span class="app-name">{a["name"]}</span><span class="app-tag"> · {a["tag"]}</span></span></div>
         <div class="links">{status}{store_link(a, "store")}<a href="/{a["slug"]}/support.html">[ support ]</a><a href="/{a["slug"]}/privacy.html">[ privacy ]</a></div>
-      </div>''')
+      </div>'''
+
+def home():
+    rows = [row(a) for a in APPS]
     return head("b347.dev", "Apps for Apple platforms. Support and privacy pages.", "https://b347.dev/") + f'''<main class="wrap" id="main">
   <header class="top">{BRAND}</header>
 
@@ -299,9 +302,7 @@ write("_templates/privacy.html", privacy(T, [
     ("Third parties", "{{NAME}} shares no personal data with third parties. {{Name each service and what it receives.}}"),
     ("Data on your device", "{{What the app stores locally, and how to remove it.}}"),
 ]))
-T_row = home().split('<div class="app" id="isseeyou">')[1].split('</div>\n      </div>')[0]
-write("_templates/index-row.html", "<!-- One app row for index.html, inside <div class=\"apps\">. Status: live / testflight. Store link: [ App Store ], [ TestFlight ] or <span class=\"store muted\">[ beta full ]</span>. -->\n"
-      + '      <div class="app" id="{{SLUG}}">' + T_row.replace("isseeyou", "{{SLUG}}").replace("ISSeeYou", "{{NAME}}").replace("Real-time ISS tracker.", "{{TAGLINE}}").replace("{{STORE_URL_{{SLUG}}}}", "{{STORE_URL}}").replace("{{STORE_URL_ISSEEYOU}}", "{{STORE_URL}}").replace('<span class="store"></span>', '<a class="store" href="{{STORE_URL}}">[ App Store ]</a>') + "</div>\n      </div>\n")
+write("_templates/index-row.html", "<!-- One app row for index.html, inside <div class=\"apps\">. Status: live / testflight / in dev. Store link: [ App Store ], [ TestFlight ] or <span class=\"store muted\">[ beta full ]</span>. -->\n" + row(T) + "\n")
 def not_found():
     return head("404 Not Found — b347.dev", "Page not found.", "https://b347.dev/") + f'''<main class="wrap" id="main">
   <header class="top">{BRAND}</header>

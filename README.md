@@ -56,3 +56,11 @@ In `index.html`, in the app's row:
 ```zsh
 sed -i '' -E 's/rev [0-9-]+/rev 2026-12-01/' $(grep -rl 'class="bar"' --include='*.html' .)
 ```
+
+## Before a push
+
+```zsh
+./check.zsh
+```
+
+FAIL blocks the push: broken internal link, missing page or stub, missing privacy section, missing mailto, third-party resource. WARN does not block: `{{...}}` placeholders, different rev dates.

@@ -10,7 +10,7 @@ Folders starting with "_" are not published by GitHub Pages.
 import sys, os, html
 
 ROOT = sys.argv[1]
-REV = "2026-11-26"
+REV = "20261126"
 MAIL_TEXT = "sibe1024[at]gmx{dot}net"
 MAIL_HREF = "mailto:sibe1024@gmx.net"
 CONTROLLER = "Beat Sifrig<br>Altstetterstrasse 193<br>CH-Zurich"
@@ -48,7 +48,7 @@ def footer():
     return f'''<footer class="bar">
   <div class="bar-in">
     <span>nopr_b347</span>
-    <span>rev {REV}</span>
+    <span>rev: {REV}</span>
     <a href="/privacy.html">[ site privacy ]</a>
     <span>Branch never.</span>
   </div>

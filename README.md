@@ -16,6 +16,7 @@ Support and privacy landing pages for the b347 apps. Plain HTML and one styleshe
 | `avatar.svg` | Logo in the header |
 | `favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-512.png` | Browser and Home Screen icons |
 | `_templates/` | Starting points for new pages. Jekyll does not publish folders that start with `_` |
+| `_tools/gen_a2.py` | Generator. Writes every page except `blank/` from the data in the file |
 | `404.html`, `blank/` | Error page and a separate page |
 
 - All paths are absolute (`/site.css`), so every page works at any folder depth, the 404 page included.
@@ -26,36 +27,47 @@ Support and privacy landing pages for the b347 apps. Plain HTML and one styleshe
 
 The URLs `/<app>/support.html` and `/<app>/privacy.html` are registered in App Store Connect. Renaming one breaks the App Store listing.
 
+## The generator writes the pages
+
+`_tools/gen_a2.py` writes every page except `blank/`. It overwrites them on each run. Put each change into `gen_a2.py`, or the next run removes it.
+
+```zsh
+python3 _tools/gen_a2.py .
+```
+
 ## Add an app
 
-1. Copy the templates:
-   - `_templates/support.html` → `<app>/support.html`
-   - `_templates/privacy.html` → `<app>/privacy.html`
-2. Add the row from `_templates/index-row.html` to `index.html`, inside `<div class="apps">`.
-3. Replace every `{{PLACEHOLDER}}`. Find leftovers with `grep -rn '{{' --include='*.html' .`
-4. Put the icon in `<app>/images/icon.png`, 256 px: `sips -Z 256`.
+1. In `_tools/gen_a2.py`, add an entry to `APPS` (slug, name, tag, devices, state, store).
+2. Add its texts to `CONTENT` under the same slug: the privacy sections and the FAQ.
+3. Put the icon in `<app>/images/icon.png`, 256 px: `sips -Z 256`.
+4. Run the generator. Then run `./check.zsh`.
 5. In App Store Connect, enter `https://b347.dev/<app>/support.html` and `https://b347.dev/<app>/privacy.html`.
 
 ## Every privacy page has these sections
 
 Apple guideline 5.1.1 and the Swiss data protection act (revFADP) require them.
 
-`Your data` · `Network requests` (if any) · `Third parties` · `Data on your device` · `Delete your data` · `Changes` · `Controller and contact`, plus the `rev:` date under the title.
+- `Your data`
+- `Network requests` (if any)
+- `Third parties`
+- `Data on your device`
+- `Delete your data`
+- `Changes`
+- `Controller and contact`
+
+The `rev:` date goes under the title.
 
 ## Change the status of an app
 
-In `index.html`, in the app's row:
-- live: `<span class="status live">● live</span>` and `<a class="store" href="…">[ App Store ]</a>`
-- open beta: `<span class="status beta">○ testflight</span>` and `<a class="store" href="…">[ TestFlight ]</a>`
-- full beta: `<span class="status beta">○ testflight</span>` and `<span class="store muted">[ beta full ]</span>`
+In `_tools/gen_a2.py`, set `state` and `store` in the app's entry in `APPS`. Then run the generator.
+- `live`: "● live" and `[ App Store ]`. `store` is the App Store URL.
+- `open`: "○ testflight" and `[ TestFlight ]`. `store` is the TestFlight link.
+- `closed`: "○ testflight" and `[ beta full ]`.
+- `dev`: "○ in dev" and no store link.
 
 ## Revision
 
-`rev` in the footer is the site revision. A privacy policy has its own `rev:` under its title. Update it when the policy changes:
-
-```zsh
-sed -i '' -E 's/rev [0-9-]+/rev 2026-12-01/' $(grep -rl 'class="bar"' --include='*.html' .)
-```
+`rev:` in the footer and under each privacy title shows the date of the last change, as `YYYYMMDD`. The generator writes one date for all pages. To change it, set `REV` in `_tools/gen_a2.py`. Then run the generator.
 
 ## Before a push
 
@@ -63,4 +75,4 @@ sed -i '' -E 's/rev [0-9-]+/rev 2026-12-01/' $(grep -rl 'class="bar"' --include=
 ./check.zsh
 ```
 
-FAIL blocks the push: broken internal link, missing page or stub, missing privacy section, missing mailto, third-party resource. WARN does not block: `{{...}}` placeholders, different rev dates.
+FAIL blocks the push: broken internal link, missing page or stub, missing privacy section, missing rev date, missing mailto, third-party resource. WARN does not block: `{{...}}` placeholders, different rev dates.

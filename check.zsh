@@ -72,7 +72,7 @@ for dir in */support.html(:h); do
   for s in $required_privacy; do
     grep -qF -- "[ $s ]" $dir/privacy.html || fail "$dir/privacy.html: section '$s' missing"
   done
-  grep -qE 'rev: [0-9]{4}-[0-9]{2}-[0-9]{2}' $dir/privacy.html || fail "$dir/privacy.html: no rev date"
+  grep -qE 'class="sub">.*rev: [0-9]{8}</p>' $dir/privacy.html || fail "$dir/privacy.html: no rev date under the title"
 done
 
 # 5. Required root files.
@@ -80,8 +80,10 @@ for f in index.html privacy.html 404.html CNAME site.css favicon.ico; do
   [[ -f $f ]] || fail "$f missing"
 done
 
-# 6. One rev date across the site.
-revs=( ${(u)${(f)"$(grep -ohE 'rev:? [0-9]{4}-[0-9]{2}-[0-9]{2}' $pages | grep -oE '[0-9-]{10}')"}} )
+grep -qE 'class="sub">.*rev: [0-9]{8}</p>' privacy.html || fail "privacy.html: no rev date under the title"
+
+# 6. One rev date across the site. Any rev format counts, so a leftover old date shows up.
+revs=( ${(u)${(f)"$(grep -ohE 'rev:? [0-9][0-9-]*[0-9]' $pages | grep -oE '[0-9][0-9-]*[0-9]$')"}} )
 (( ${#revs} > 1 )) && warn "different rev dates: ${(j:, :)revs}"
 
 print -- "--"

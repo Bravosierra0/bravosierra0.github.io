@@ -59,7 +59,7 @@ def footer():
 
 APPS = [
     dict(slug="isseeyou", name="ISSeeYou", tag="Real-time ISS tracker.", devices="Mac, iPhone, iPad and Apple TV",
-         state="live", store="{{STORE_URL_ISSEEYOU}}"),
+         state="live", store=None),  # D4: App Store URL follows
     dict(slug="rakrak", name="Rak Rak", tag="Relationship date tracker.", devices="iPhone and iPad",
          state="closed", store=None),
     dict(slug="oh-shift", name="Oh Shift!", tag="Roster calendar for shift work.", devices="iPhone and iPad",
@@ -70,6 +70,8 @@ APPS = [
 
 def store_link(a, cls=""):
     c = f' class="{cls}"' if cls else ""
+    if a["state"] in ("live", "open") and not a["store"]:
+        return f'<span{c}></span>' if cls else ""   # URL not known yet: no link
     if a["state"] == "live":
         return f'<a{c} href="{a["store"]}">[ App Store ]</a>'
     if a["state"] == "open":
@@ -299,7 +301,7 @@ write("_templates/privacy.html", privacy(T, [
 ]))
 T_row = home().split('<div class="app" id="isseeyou">')[1].split('</div>\n      </div>')[0]
 write("_templates/index-row.html", "<!-- One app row for index.html, inside <div class=\"apps\">. Status: live / testflight. Store link: [ App Store ], [ TestFlight ] or <span class=\"store muted\">[ beta full ]</span>. -->\n"
-      + '      <div class="app" id="{{SLUG}}">' + T_row.replace("isseeyou", "{{SLUG}}").replace("ISSeeYou", "{{NAME}}").replace("Real-time ISS tracker.", "{{TAGLINE}}").replace("{{STORE_URL_{{SLUG}}}}", "{{STORE_URL}}").replace("{{STORE_URL_ISSEEYOU}}", "{{STORE_URL}}") + "</div>\n      </div>\n")
+      + '      <div class="app" id="{{SLUG}}">' + T_row.replace("isseeyou", "{{SLUG}}").replace("ISSeeYou", "{{NAME}}").replace("Real-time ISS tracker.", "{{TAGLINE}}").replace("{{STORE_URL_{{SLUG}}}}", "{{STORE_URL}}").replace("{{STORE_URL_ISSEEYOU}}", "{{STORE_URL}}").replace('<span class="store"></span>', '<a class="store" href="{{STORE_URL}}">[ App Store ]</a>') + "</div>\n      </div>\n")
 def not_found():
     return head("404 Not Found — b347.dev", "Page not found.", "https://b347.dev/") + f'''<main class="wrap" id="main">
   <header class="top">{BRAND}</header>
